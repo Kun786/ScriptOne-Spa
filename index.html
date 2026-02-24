@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScriptOne | Intelligence Architecture Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#F3F1E7',
+                            dark: '#050505',
+                            accent: '#D97757',
+                            linkedin: '#0a66c2',
+                            surface: '#FFFFFF',
+                            'surface-dark': '#121212'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Symmetrical Layout Controls */
+        html, body { overflow-x: hidden; width: 100%; position: relative; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 4px; }
+        
+        .app-container {
+            max-width: 85rem; 
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .app-container { padding-left: 4rem; padding-right: 4rem; }
+        }
+
+        /* High-Velocity Shimmer Line */
+        .shimmer-line {
+            position: relative;
+            height: 1px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin: 6rem 0;
+        }
+        .dark .shimmer-line { background: rgba(255, 255, 255, 0.08); }
+        .shimmer-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(217, 119, 87, 1), transparent);
+            animation: shimmer-sweep 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes shimmer-sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee-scroll 22s linear infinite;
+        }
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4rem;
+            height: 5rem;
+            min-width: 15rem;
+            font-weight: 800;
+        }
+
+        /* --- UNIFORM CARD PHYSICS: PERFECT BORDER WRAP --- */
+        .uniform-card {
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 2.5rem;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03); /* Base edge */
+        }
+        .dark .uniform-card {
+            background: rgba(18, 18, 18, 0.4);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+        }
+        .uniform-card:hover {
+            transform: translateY(-12px);
+            background: #FFFFFF;
+            /* Box-shadow used to create a perfect 360 border wrap on curves */
+            box-shadow: 0 0 0 2px #D97757, 0 35px 70px -15px rgba(217, 119, 87, 0.2);
+        }
+        .dark .uniform-card:hover {
+            background: #1A1A1A;
+            box-shadow: 0 0 0 2px #D97757, 0 35px 70px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Tech Capsule: Static Colorful Minimalism */
+        .tech-capsule {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: default;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .dark .tech-capsule {
+            background: #121212;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .tech-capsule:hover {
+            transform: translateY(-3px);
+            border-color: #D97757;
+            box-shadow: 0 10px 20px -5px rgba(217, 119, 87, 0.1);
+        }
+        
+        .tech-icon-box {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* Massive Background Footer Text */
+        .footer-bg-text {
+            font-size: 18vw;
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+            color: transparent;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        /* Typewriter & Reveal */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #D97757;
+            margin-left: 0.1em;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .expanding-box {
+            transition: width 0.1s linear, border-radius 0.1s linear;
+            will-change: width, border-radius;
+        }
+
+        /* Slider Physics */
+        #achievements-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 2.5rem;
+            width: 100%;
+        }
+        .achievement-wrapper {
+            width: calc(50% - 1.25rem);
+            flex-shrink: 0;
+        }
+        @media (max-width: 1024px) {
+            .achievement-wrapper { width: 100%; }
+        }
+
+        .view-transition { transition: opacity 0.5s ease, transform 0.5s ease; }
+        .view-hidden { display: none; opacity: 0; transform: translateY(20px); }
+
+        body, nav, section, div, h1, h2, h3, p, button {
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-dark dark:bg-brand-dark dark:text-brand-cream antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Global Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 py-8 flex justify-center items-center bg-brand-cream/90 dark:bg-brand-dark/90 backdrop-blur-md border-b border-black/5 dark:border-white/5">
+        <div class="app-container flex justify-between items-center">
+            <div class="font-serif text-3xl font-bold tracking-tighter cursor-pointer" onclick="navigateTo('home')">SCRIPTONE.</div>
+            
+            <div id="nav-links" class="hidden lg:flex items-center gap-12 font-sans text-sm font-bold tracking-widest uppercase">
+                <button onclick="scrollToSection('achievements-sec')" class="opacity-60 hover:opacity-100 transition-opacity">Achievements</button>
+                <button onclick="scrollToSection('services-sec')" class="opacity-60 hover:opacity-100 transition-opacity">Services</button>
+                <button onclick="scrollToSection('resources-sec')" class="opacity-60 hover:opacity-100 transition-opacity">Resources</button>
+                <button onclick="scrollToSection('sponsor')" class="opacity-60 hover:opacity-100 transition-opacity">Sponsor Us</button>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button onclick="toggleTheme()" class="w-12 h-12 rounded-full border border-black/10 dark:border-white/20 dark:text-white flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                    <span id="theme-icon" class="text-xl">◐</span>
+                </button>
+                <button class="hidden md:block bg-brand-dark text-white dark:bg-brand-cream dark:text-black px-8 py-3 rounded-full text-md font-bold hover:scale-105 transition-transform shadow-xl">
+                    Consult
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main id="view-switcher" class="pt-24 min-h-screen">
+        
+        <!-- HOME COMPONENT -->
+        <div id="home-view" class="view-transition">
+            
+            <!-- Hero -->
+            <header class="min-h-screen flex flex-col justify-center pt-24">
+                <div class="app-container space-y-16 mb-24">
+                    <h1 class="font-serif font-bold tracking-tighter leading-[0.9] lg:whitespace-nowrap" style="font-size: clamp(2.5rem, 6.5vw, 9.5rem);">
+                        <span id="typewriter-text"></span><span class="cursor"></span> the <span class="text-brand-accent italic">Intelligent</span> Future.
+                    </h1>
+                    <div class="max-w-4xl reveal">
+                        <p class="font-light opacity-80 leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 3rem);">
+                            ScriptOne fuses advanced AI models with robust software engineering to deliver scalable digital ecosystems.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Featured In Loop -->
+                <div class="w-full bg-brand-dark/95 dark:bg-black py-14 border-y border-white/5">
+                    <div class="app-container">
+                        <span class="block font-mono text-xs uppercase tracking-[0.4em] text-brand-accent font-bold mb-10 text-center">Featured In</span>
+                        <div class="marquee-container">
+                            <div class="marquee-track">
+                                <div class="marquee-item font-serif italic text-3xl text-brand-accent">FOX 31</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">KOIN 6</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-accent">NBC 4</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">NEWS 8</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-accent">TNH TECH</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">DENVER POST</div>
+                                <!-- Duplicate -->
+                                <div class="marquee-item font-serif italic text-3xl text-brand-accent">FOX 31</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">KOIN 6</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-accent">NBC 4</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">NEWS 8</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-accent">TNH TECH</div>
+                                <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">DENVER POST</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="app-container"><div class="shimmer-line"></div></div>
+
+            <!-- Achievements Component -->
+            <section id="achievements-sec" class="min-h-screen flex flex-col justify-center py-24">
+                <div class="app-container reveal mb-20 relative">
+                    <div class="flex flex-col md:flex-row justify-between items-end gap-12">
+                        <div class="flex-1">
+                            <h2 class="font-serif font-bold tracking-tighter mb-8" style="font-size: clamp(3.5rem, 6vw, 8.5rem);">Achievements.</h2>
+                            <p class="opacity-60 max-w-3xl leading-snug" style="font-size: clamp(1.25rem, 2.2vw, 2.5rem);">
+                                High-throughput architectural milestones from our latest production deployments.
+                            </p>
+                        </div>
+                        <div class="flex gap-4 mb-4">
+                            <button onclick="moveSlider(-1)" class="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">←</button>
+                            <button onclick="moveSlider(1)" class="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">→</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-container">
+                    <div class="slider-window">
+                        <div id="achievements-track" class="py-4">
+                            <!-- Card 1 -->
+                            <div class="achievement-wrapper">
+                                <div class="uniform-card p-14 cursor-pointer" onclick="navigateToDetail('analyzer')">
+                                    <div class="flex justify-between items-start mb-16">
+                                        <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Infrastructure</span>
+                                        <span class="text-4xl">↗</span>
+                                    </div>
+                                    <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">S1_Analyzer</h3>
+                                    <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">99.9% uptime achieved across 400+ distributed cluster nodes.</p>
+                                    <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+                                </div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="achievement-wrapper">
+                                <div class="uniform-card p-14 cursor-pointer" onclick="navigateToDetail('nexus')">
+                                    <div class="flex justify-between items-start mb-16">
+                                        <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Neural Mesh</span>
+                                        <span class="text-4xl">↗</span>
+                                    </div>
+                                    <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Nexus_Mesh</h3>
+                                    <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">Sub-15ms overhead recorded for context-aware RAG pipelines.</p>
+                                    <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase text-brand-accent">Inspect</div>
+                                </div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="achievement-wrapper">
+                                <div class="uniform-card p-14 cursor-pointer" onclick="navigateToDetail('elastic')">
+                                    <div class="flex justify-between items-start mb-16">
+                                        <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Scaling</span>
+                                        <span class="text-4xl">↗</span>
+                                    </div>
+                                    <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Elastic Core</h3>
+                                    <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">Global load balancing scaling to 12.5M concurrent requests.</p>
+                                    <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="app-container"><div class="shimmer-line"></div></div>
+
+            <!-- Services Section: Light-Themed -->
+            <section id="services-sec" class="min-h-screen flex flex-col justify-center py-24">
+                <div class="app-container reveal mb-16">
+                    <h2 class="font-serif font-bold tracking-tighter mb-4" style="font-size: clamp(3rem, 5vw, 7rem);">Services.</h2>
+                    <p class="opacity-50 text-xl font-light">End-to-end engineering and the technologies that power our architectures.</p>
+                </div>
+
+                <!-- Disciplines Grid -->
+                <div class="app-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal mb-24">
+                    <div class="uniform-card p-10 group">
+                        <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">✦</div>
+                        <h4 class="text-xl font-bold mb-4">Generative AI</h4>
+                        <p class="text-sm opacity-50 leading-relaxed">Custom LLM fine-tuning and secure contextual memory pipelines.</p>
+                    </div>
+                    <div class="uniform-card p-10 group">
+                        <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◈</div>
+                        <h4 class="text-xl font-bold mb-4">Core Software</h4>
+                        <p class="text-sm opacity-50 leading-relaxed">High-performance Rust systems built for horizontal edge scale.</p>
+                    </div>
+                    <div class="uniform-card p-10 group">
+                        <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◉</div>
+                        <h4 class="text-xl font-bold mb-4">Headless CMS</h4>
+                        <p class="text-sm opacity-50 leading-relaxed">Decoupling WordPress with Next.js for sub-100ms LCP.</p>
+                    </div>
+                    <div class="uniform-card p-10 group">
+                        <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◍</div>
+                        <h4 class="text-xl font-bold mb-4">Cloud Native</h4>
+                        <p class="text-sm opacity-50 leading-relaxed">Serverless architectures and global edge deployments.</p>
+                    </div>
+                </div>
+
+                <!-- Supercharged Stack Heading -->
+                <div class="app-container reveal mb-12">
+                    <h2 class="font-serif font-bold tracking-tighter mb-4" style="font-size: clamp(3rem, 5vw, 7rem);">Supercharged Stack.</h2>
+                    <p class="opacity-40 text-sm uppercase tracking-widest font-mono">Modern frameworks integrated with precision</p>
+                </div>
+
+                <!-- Tech Ecosystem Grid (Static, Colorful Icons) -->
+                <div class="app-container flex flex-wrap gap-4 reveal" id="tech-grid">
+                    <!-- JS will populate -->
+                </div>
+            </section>
+
+            <div class="app-container"><div class="shimmer-line"></div></div>
+
+            <!-- Neural Core Break -->
+            <div class="py-24 w-full flex justify-center items-center">
+                <div id="expanding-box" class="expanding-box bg-brand-dark dark:bg-brand-cream text-white dark:text-black w-[80%] h-[700px] rounded-[5rem] relative overflow-hidden shadow-2xl flex flex-col items-center justify-center">
+                    <div class="absolute inset-0 z-0 opacity-40 scale-125">
+                        <div class="chart-container h-full max-h-full w-full"><canvas id="neuralChart"></canvas></div>
+                    </div>
+                    <div class="z-10 text-center px-12 pointer-events-none">
+                        <h2 class="font-serif font-bold mb-10 tracking-tighter" style="font-size: clamp(3.5rem, 6vw, 9rem);">Neural Core</h2>
+                        <p class="font-light opacity-80 max-w-4xl mx-auto leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 3rem);">
+                            Processing intelligence locally. Scroll to expand the system.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <section id="resources-sec" class="min-h-screen flex flex-col justify-center py-24">
+                <div class="app-container reveal mb-16">
+                    <h2 class="font-serif font-bold tracking-tighter mb-6" style="font-size: clamp(3rem, 5vw, 7rem);">Resources.</h2>
+                </div>
+                <div class="app-container space-y-6 reveal">
+                    <div class="flex flex-col md:flex-row items-center justify-between p-10 rounded-[3rem] border border-black/5 dark:border-white/5 bg-white/40 dark:bg-white/5 hover:border-brand-accent transition-all group">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="text-2xl font-bold mb-1">AI Readiness Framework</h4>
+                            <p class="opacity-50 text-sm uppercase tracking-widest font-mono">PDF / 4.2MB / 2024 Audit</p>
+                        </div>
+                        <button class="w-14 h-14 rounded-full bg-brand-dark text-white dark:bg-brand-cream dark:text-black flex items-center justify-center group-hover:scale-110 transition-transform">↓</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sponsor -->
+            <section id="sponsor" class="pb-24 pt-12">
+                <div class="app-container">
+                    <div class="bg-brand-dark text-white dark:bg-brand-cream dark:text-black rounded-[5rem] p-16 md:p-32 text-center shadow-2xl reveal relative overflow-hidden">
+                        <h2 class="font-serif font-bold mb-10 tracking-tighter z-10 relative" style="font-size: clamp(4rem, 8vw, 10rem);">Sponsor Us.</h2>
+                        <div class="flex flex-wrap justify-center gap-10 z-10 relative">
+                            <button class="px-20 py-8 bg-brand-accent text-white rounded-full font-bold text-2xl hover:scale-110 shadow-2xl transition-transform">Partner Now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- DETAIL VIEW -->
+        <div id="detail-view" class="view-transition view-hidden pb-32">
+            <div class="app-container">
+                <header class="py-24">
+                    <button onclick="navigateTo('home')" class="mb-12 flex items-center gap-4 text-brand-accent font-bold uppercase tracking-widest text-sm hover:translate-x-[-10px] transition-transform">
+                        <span class="text-2xl">←</span> Return to Overview
+                    </button>
+                    <span id="detail-tag" class="font-mono text-sm uppercase tracking-[0.4em] opacity-50 block mb-8 font-bold">CATEGORY_TAG</span>
+                    <h2 id="detail-heading" class="font-serif font-bold tracking-tighter leading-[0.9] mb-12" style="font-size: clamp(3rem, 7vw, 9rem);">ACHIEVEMENT_TITLE</h2>
+                    <div class="shimmer-line !w-1/2 !mx-0 !my-8"></div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                    <div class="space-y-16">
+                        <p id="detail-desc" class="font-light opacity-80 leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 2.8rem);">
+                            Deep technical overview of engineering success and architectures.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="uniform-card p-12">
+                                <span class="font-mono text-xs opacity-40 uppercase tracking-widest font-bold block mb-4">Uptime Metric</span>
+                                <span id="stat-1" class="text-6xl font-serif font-bold text-brand-accent tracking-tighter">99.9%</span>
+                                <p id="label-1" class="text-sm font-bold uppercase opacity-50 mt-4">Resilience</p>
+                            </div>
+                            <div class="uniform-card p-12">
+                                <span class="font-mono text-xs opacity-40 uppercase tracking-widest font-bold block mb-4">Inference Velocity</span>
+                                <span id="stat-2" class="text-6xl font-serif font-bold text-brand-accent tracking-tighter">15ms</span>
+                                <p id="label-2" class="text-sm font-bold uppercase opacity-50 mt-4">Velocity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-12">
+                        <div class="uniform-card p-12 shadow-2xl">
+                            <h4 class="font-mono text-xs uppercase tracking-widest opacity-50 font-bold mb-10 text-center">Performance Trajectory</h4>
+                            <div class="chart-container"><canvas id="detailChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODERN INSTITUTIONAL FOOTER -->
+    <footer class="relative bg-brand-dark dark:bg-black text-white pt-32 pb-24 overflow-hidden">
+        <!-- Massive Outline Text Backdrop -->
+        <div class="absolute bottom-[-5%] left-1/2 -translate-x-1/2 footer-bg-text">SCRIPTONE</div>
+
+        <div class="app-container relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
+                <!-- Left: Logo & Narrative -->
+                <div class="max-w-xl">
+                    <div class="font-serif text-3xl font-bold tracking-tighter mb-6">SCRIPTONE.</div>
+                    <p class="opacity-40 text-lg font-light leading-relaxed mb-10">
+                        AI-powered intelligence that reveals true architectural potential and secures your enterprise scale. Architecting the intelligent future through advanced LLM integration and high-performance engineering.
+                    </p>
+                    <div class="flex flex-wrap gap-8 text-[10px] font-mono uppercase tracking-[0.3em] font-bold opacity-30">
+                        <a href="#" class="hover:text-brand-accent transition-colors">Contact us</a>
+                        <a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-brand-accent transition-colors">Terms & Conditions</a>
+                    </div>
+                </div>
+
+                <!-- Right: Social (LinkedIn Blue Hover) -->
+                <div class="flex flex-col items-end">
+                    <a href="https://linkedin.com" target="_blank" class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-linkedin hover:border-brand-linkedin transition-all duration-300">
+                        <span class="italic font-serif font-black text-2xl leading-none">in</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 opacity-20">
+                <p class="font-mono text-[10px] uppercase tracking-[0.2em]">© 2024 SCRIPTONE SOLUTIONS — ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            theme: localStorage.getItem('theme') || 'light',
+            view: 'home',
+            sliderIndex: 0,
+            charts: {},
+            achievements: {
+                analyzer: { tag: 'Integrity', title: 'S1_Analyzer', desc: 'Real-time topology mapping across distributed server clusters.', stat1: '99.9%', label1: 'Stability', stat2: '1.2TB', label2: 'Logs/Day', chartData: [45, 52, 48, 60, 58, 72, 85], chartLabel: 'Inference Precision' },
+                nexus: { tag: 'Latency', title: 'Nexus_Mesh', desc: 'Specialized API gateway for RAG pipelines with near-zero overhead.', stat1: '14ms', label1: 'Response', stat2: '3.2x', label2: 'Lift', chartData: [85, 80, 75, 72, 68, 65, 62], chartLabel: 'Latency Decay' },
+                elastic: { tag: 'Scaling', title: 'Elastic Core', desc: 'Predictive load balancing engine anticipating traffic spikes.', stat1: '12.5M', label1: 'Concurrent', stat2: '0ms', label2: 'Cold Starts', chartData: [10, 25, 40, 65, 85, 110, 140], chartLabel: 'Velocity' }
+            },
+            techStack: [
+                { name: 'WordPress', icon: 'W', color: '#21759b', bg: '#e2f2ff' },
+                { name: 'WooCommerce', icon: '🛒', color: '#96588a', bg: '#f9efff' },
+                { name: 'MEAN Stack', icon: 'M', color: '#00cc66', bg: '#eafff1' },
+                { name: 'MERN Stack', icon: '⚛', color: '#61dafb', bg: '#f0fbff' },
+                { name: 'Next.js', icon: '▲', color: '#000000', bg: '#f0f0f0' },
+                { name: 'TypeScript', icon: 'TS', color: '#3178c6', bg: '#eef6ff' },
+                { name: 'Python', icon: '🐍', color: '#3776ab', bg: '#eff7ff' },
+                { name: 'TailwindCSS', icon: '🌊', color: '#06b6d4', bg: '#e0fbff' },
+                { name: 'Nest.js', icon: '🦅', color: '#e0234e', bg: '#fff0f3' },
+                { name: 'PostgreSQL', icon: '🐘', color: '#336791', bg: '#eff5ff' },
+                { name: 'MongoDB', icon: '🍃', color: '#47a248', bg: '#f0fff1' },
+                { name: 'Supabase', icon: '⚡', color: '#3ecf8e', bg: '#ecfff7' },
+                { name: 'AWS', icon: '☁', color: '#ff9900', bg: '#fff8e6' },
+                { name: 'Docker', icon: '🐳', color: '#2496ed', bg: '#effaff' },
+                { name: 'Kubernetes', icon: '☸', color: '#326ce5', bg: '#f0f6ff' },
+                { name: 'Terraform', icon: '🏗', color: '#623ce4', bg: '#f5f0ff' }
+            ]
+        };
+
+        // --- Core Transitions ---
+        function navigateTo(view, achievementId = null) {
+            const home = document.getElementById('home-view');
+            const detail = document.getElementById('detail-view');
+            const navLinks = document.getElementById('nav-links');
+            if (view === 'home') {
+                state.view = 'home';
+                detail.classList.add('view-hidden');
+                home.classList.remove('view-hidden');
+                navLinks.classList.remove('hidden');
+            } else if (view === 'detail' && achievementId) {
+                state.view = 'detail';
+                home.classList.add('view-hidden');
+                detail.classList.remove('view-hidden');
+                navLinks.classList.add('hidden');
+                const data = state.achievements[achievementId];
+                document.getElementById('detail-tag').textContent = data.tag;
+                document.getElementById('detail-heading').textContent = data.title;
+                document.getElementById('detail-desc').textContent = data.desc;
+                document.getElementById('stat-1').textContent = data.stat1;
+                document.getElementById('label-1').textContent = data.label1;
+                document.getElementById('stat-2').textContent = data.stat2;
+                document.getElementById('label-2').textContent = data.label2;
+                setTimeout(() => renderDetailChart(data.chartData, data.chartLabel), 100);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => handleReveal(), 100);
+        }
+
+        function navigateToDetail(id) { navigateTo('detail', id); }
+
+        function renderTechGrid() {
+            const grid = document.getElementById('tech-grid');
+            grid.innerHTML = state.techStack.map(tech => `
+                <div class="tech-capsule">
+                    <div class="tech-icon-box" style="background-color: ${tech.bg}; color: ${tech.color}">
+                        ${tech.icon}
+                    </div>
+                    <span class="tech-name text-sm font-bold text-black dark:text-white">${tech.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function initTypewriter() {
+            const text = "Building";
+            const target = document.getElementById('typewriter-text');
+            if (!target) return;
+            let i = 0; target.textContent = "";
+            function type() { if (i < text.length) { target.textContent += text.charAt(i); i++; setTimeout(type, 150); } }
+            setTimeout(type, 600);
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            state.theme = state.theme === 'light' ? 'dark' : 'light';
+            if (state.theme === 'dark') {
+                html.classList.add('dark');
+                document.getElementById('theme-icon').textContent = '☼';
+            } else {
+                html.classList.remove('dark');
+                document.getElementById('theme-icon').textContent = '◐';
+            }
+            localStorage.setItem('theme', state.theme);
+        }
+
+        function moveSlider(direction) {
+            const track = document.getElementById('achievements-track');
+            const viewCount = window.innerWidth < 1024 ? 1 : 2;
+            const max = Math.ceil(3 / viewCount) - 1;
+            state.sliderIndex += direction;
+            if (state.sliderIndex < 0) state.sliderIndex = 0;
+            if (state.sliderIndex > max) state.sliderIndex = max;
+            const gap = 40;
+            track.style.transform = `translateX(calc(-${state.sliderIndex * 100}% - ${state.sliderIndex * gap}px))`;
+        }
+
+        function renderDetailChart(data, label) {
+            const ctx = document.getElementById('detailChart').getContext('2d');
+            if (state.charts.detail) state.charts.detail.destroy();
+            state.charts.detail = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                    datasets: [{ label, data, borderColor: '#D97757', backgroundColor: 'rgba(217, 119, 87, 0.1)', fill: true, tension: 0.4, borderWidth: 4, pointRadius: 6, pointBackgroundColor: '#D97757' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { x: { display: false }, y: { display: false } }, plugins: { legend: { display: false } } }
+            });
+        }
+
+        function handleReveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.9) el.classList.add('active');
+            });
+        }
+
+        function handleScroll() {
+            if (state.view !== 'home') return;
+            const box = document.getElementById('expanding-box');
+            if (box) {
+                const rect = box.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                if (rect.top < viewHeight && rect.bottom > 0) {
+                    const factor = Math.min(1, Math.max(0, (viewHeight - rect.top) / 500));
+                    box.style.width = `${80 + (20 * factor)}%`;
+                    box.style.borderRadius = `${5 - (5 * factor)}rem`;
+                }
+            }
+        }
+
+        function scrollToSection(id) {
+            if (state.view !== 'home') navigateTo('home');
+            const el = document.getElementById(id);
+            if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 120, behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTypewriter();
+            renderTechGrid();
+            if (state.theme === 'dark') document.documentElement.classList.add('dark');
+            const ctx = document.getElementById('neuralChart').getContext('2d');
+            const nodes = Array.from({length: 30}, () => ({ x: Math.random() * 100, y: Math.random() * 100, r: Math.random() * 15 + 8 }));
+            state.charts.neural = new Chart(ctx, {
+                type: 'bubble',
+                data: { datasets: [{ data: nodes, backgroundColor: 'rgba(217, 119, 87, 0.5)', borderColor: 'transparent' }] },
+                options: { responsive: true, maintainAspectRatio: false, scales: { x: { display: false }, y: { display: false } }, plugins: { legend: { display: false } }, animation: { duration: 3000, loop: true } }
+            });
+            setInterval(() => { state.charts.neural.data.datasets[0].data.forEach(n => { n.x += (Math.random()-0.5)*1.2; n.y += (Math.random()-0.5)*1.2; }); state.charts.neural.update('none'); }, 100);
+            window.addEventListener('scroll', () => { handleReveal(); handleScroll(); });
+            handleReveal();
+        });
+    </script>
+</body>
+</html>
