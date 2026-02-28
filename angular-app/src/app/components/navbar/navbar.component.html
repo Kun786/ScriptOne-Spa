@@ -1,0 +1,21 @@
+<nav id="navbar" class="fixed top-0 w-full z-50 py-8 flex justify-center items-center bg-brand-cream/90 dark:bg-brand-dark/90 backdrop-blur-md border-b border-black/5 dark:border-white/5">
+  <div class="app-container flex justify-between items-center">
+    <div class="font-serif text-3xl font-bold tracking-tighter cursor-pointer" (click)="state.navigateToHome()">SCRIPTONE.</div>
+
+    <div class="hidden lg:flex items-center gap-12 font-sans text-sm font-bold tracking-widest uppercase" [class.hidden]="!isHome()">
+      <button (click)="scrollToSection('achievements-sec')" class="opacity-60 hover:opacity-100 transition-opacity">Achievements</button>
+      <button (click)="scrollToSection('services-sec')" class="opacity-60 hover:opacity-100 transition-opacity">Services</button>
+      <button (click)="scrollToSection('resources-sec')" class="opacity-60 hover:opacity-100 transition-opacity">Resources</button>
+      <button (click)="scrollToSection('sponsor')" class="opacity-60 hover:opacity-100 transition-opacity">Sponsor Us</button>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button (click)="state.toggleTheme()" class="w-12 h-12 rounded-full border border-black/10 dark:border-white/20 dark:text-white flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+        <span class="text-xl">{{ themeIcon() }}</span>
+      </button>
+      <button class="hidden md:block bg-brand-dark text-white dark:bg-brand-cream dark:text-black px-8 py-3 rounded-full text-md font-bold hover:scale-105 transition-transform shadow-xl">
+        Consult
+      </button>
+    </div>
+  </div>
+</nav>

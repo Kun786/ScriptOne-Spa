@@ -1,0 +1,199 @@
+<!-- HOME VIEW -->
+
+<!-- Hero -->
+<header class="min-h-screen flex flex-col justify-center pt-24">
+  <div class="app-container space-y-16 mb-24">
+    <h1 class="font-serif font-bold tracking-tighter leading-[0.9] lg:whitespace-nowrap" style="font-size: clamp(2.5rem, 6.5vw, 9.5rem);">
+      <span>{{ typewriterText }}</span><span class="cursor-blink"></span> the <span class="text-brand-accent italic">Intelligent</span> Future.
+    </h1>
+    <div class="max-w-4xl reveal">
+      <p class="font-light opacity-80 leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 3rem);">
+        ScriptOne fuses advanced AI models with robust software engineering to deliver scalable digital ecosystems.
+      </p>
+    </div>
+  </div>
+
+  <!-- Featured In Loop -->
+  <div class="w-full bg-brand-dark/95 dark:bg-black py-14 border-y border-white/5">
+    <div class="app-container">
+      <span class="block font-mono text-xs uppercase tracking-[0.4em] text-brand-accent font-bold mb-10 text-center">Featured In</span>
+      <div class="marquee-container">
+        <div class="marquee-track">
+          <div class="marquee-item font-serif italic text-3xl text-brand-accent">FOX 31</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">KOIN 6</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-accent">NBC 4</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">NEWS 8</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-accent">TNH TECH</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">DENVER POST</div>
+          <!-- Duplicate for seamless loop -->
+          <div class="marquee-item font-serif italic text-3xl text-brand-accent">FOX 31</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">KOIN 6</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-accent">NBC 4</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">NEWS 8</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-accent">TNH TECH</div>
+          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">DENVER POST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="app-container"><div class="shimmer-line"></div></div>
+
+<!-- Achievements Section -->
+<section id="achievements-sec" class="min-h-screen flex flex-col justify-center py-24">
+  <div class="app-container reveal mb-20 relative">
+    <div class="flex flex-col md:flex-row justify-between items-end gap-12">
+      <div class="flex-1">
+        <h2 class="font-serif font-bold tracking-tighter mb-8" style="font-size: clamp(3.5rem, 6vw, 8.5rem);">Achievements.</h2>
+        <p class="opacity-60 max-w-3xl leading-snug" style="font-size: clamp(1.25rem, 2.2vw, 2.5rem);">
+          High-throughput architectural milestones from our latest production deployments.
+        </p>
+      </div>
+      <div class="flex gap-4 mb-4">
+        <button (click)="moveSlider(-1)" class="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">←</button>
+        <button (click)="moveSlider(1)"  class="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">→</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <div class="slider-window" style="overflow: hidden;">
+      <div id="achievements-track" class="py-4" [style.transform]="sliderTransform()">
+        <!-- Card 1 -->
+        <div class="achievement-wrapper">
+          <div class="uniform-card p-14 cursor-pointer" (click)="state.navigateToDetail('analyzer')">
+            <div class="flex justify-between items-start mb-16">
+              <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Infrastructure</span>
+              <span class="text-4xl">↗</span>
+            </div>
+            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">S1_Analyzer</h3>
+            <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">99.9% uptime achieved across 400+ distributed cluster nodes.</p>
+            <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="achievement-wrapper">
+          <div class="uniform-card p-14 cursor-pointer" (click)="state.navigateToDetail('nexus')">
+            <div class="flex justify-between items-start mb-16">
+              <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Neural Mesh</span>
+              <span class="text-4xl">↗</span>
+            </div>
+            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Nexus_Mesh</h3>
+            <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">Sub-15ms overhead recorded for context-aware RAG pipelines.</p>
+            <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase text-brand-accent">Inspect</div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="achievement-wrapper">
+          <div class="uniform-card p-14 cursor-pointer" (click)="state.navigateToDetail('elastic')">
+            <div class="flex justify-between items-start mb-16">
+              <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Scaling</span>
+              <span class="text-4xl">↗</span>
+            </div>
+            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Elastic Core</h3>
+            <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">Global load balancing scaling to 12.5M concurrent requests.</p>
+            <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="app-container"><div class="shimmer-line"></div></div>
+
+<!-- Services Section -->
+<section id="services-sec" class="min-h-screen flex flex-col justify-center py-24">
+  <div class="app-container reveal mb-16">
+    <h2 class="font-serif font-bold tracking-tighter mb-4" style="font-size: clamp(3rem, 5vw, 7rem);">Services.</h2>
+    <p class="opacity-50 text-xl font-light">End-to-end engineering and the technologies that power our architectures.</p>
+  </div>
+
+  <!-- Disciplines Grid -->
+  <div class="app-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal mb-24">
+    <div class="uniform-card p-10 group">
+      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">✦</div>
+      <h4 class="text-xl font-bold mb-4">Generative AI</h4>
+      <p class="text-sm opacity-50 leading-relaxed">Custom LLM fine-tuning and secure contextual memory pipelines.</p>
+    </div>
+    <div class="uniform-card p-10 group">
+      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◈</div>
+      <h4 class="text-xl font-bold mb-4">Core Software</h4>
+      <p class="text-sm opacity-50 leading-relaxed">High-performance Rust systems built for horizontal edge scale.</p>
+    </div>
+    <div class="uniform-card p-10 group">
+      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◉</div>
+      <h4 class="text-xl font-bold mb-4">Headless CMS</h4>
+      <p class="text-sm opacity-50 leading-relaxed">Decoupling WordPress with Next.js for sub-100ms LCP.</p>
+    </div>
+    <div class="uniform-card p-10 group">
+      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◍</div>
+      <h4 class="text-xl font-bold mb-4">Cloud Native</h4>
+      <p class="text-sm opacity-50 leading-relaxed">Serverless architectures and global edge deployments.</p>
+    </div>
+  </div>
+
+  <!-- Supercharged Stack -->
+  <div class="app-container reveal mb-12">
+    <h2 class="font-serif font-bold tracking-tighter mb-4" style="font-size: clamp(3rem, 5vw, 7rem);">Supercharged Stack.</h2>
+    <p class="opacity-40 text-sm uppercase tracking-widest font-mono">Modern frameworks integrated with precision</p>
+  </div>
+
+  <!-- Tech Capsules -->
+  <div class="app-container flex flex-wrap gap-4 reveal">
+    <div class="tech-capsule" *ngFor="let tech of state.techStack">
+      <div class="tech-icon-box" [style.background-color]="tech.bg" [style.color]="tech.color">
+        {{ tech.icon }}
+      </div>
+      <span class="tech-name text-sm font-bold text-black dark:text-white">{{ tech.name }}</span>
+    </div>
+  </div>
+</section>
+
+<div class="app-container"><div class="shimmer-line"></div></div>
+
+<!-- Neural Core Break -->
+<div class="py-24 w-full flex justify-center items-center">
+  <div #expandingBox class="expanding-box bg-brand-dark dark:bg-brand-cream text-white dark:text-black w-[80%] h-[700px] rounded-[5rem] relative overflow-hidden shadow-2xl flex flex-col items-center justify-center">
+    <div class="absolute inset-0 z-0 opacity-40 scale-125">
+      <div class="chart-container h-full max-h-full w-full">
+        <canvas #neuralChartCanvas></canvas>
+      </div>
+    </div>
+    <div class="z-10 text-center px-12 pointer-events-none">
+      <h2 class="font-serif font-bold mb-10 tracking-tighter" style="font-size: clamp(3.5rem, 6vw, 9rem);">Neural Core</h2>
+      <p class="font-light opacity-80 max-w-4xl mx-auto leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 3rem);">
+        Processing intelligence locally. Scroll to expand the system.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Resources -->
+<section id="resources-sec" class="min-h-screen flex flex-col justify-center py-24">
+  <div class="app-container reveal mb-16">
+    <h2 class="font-serif font-bold tracking-tighter mb-6" style="font-size: clamp(3rem, 5vw, 7rem);">Resources.</h2>
+  </div>
+  <div class="app-container space-y-6 reveal">
+    <div class="flex flex-col md:flex-row items-center justify-between p-10 rounded-[3rem] border border-black/5 dark:border-white/5 bg-white/40 dark:bg-white/5 hover:border-brand-accent transition-all group">
+      <div class="mb-4 md:mb-0">
+        <h4 class="text-2xl font-bold mb-1">AI Readiness Framework</h4>
+        <p class="opacity-50 text-sm uppercase tracking-widest font-mono">PDF / 4.2MB / 2024 Audit</p>
+      </div>
+      <button class="w-14 h-14 rounded-full bg-brand-dark text-white dark:bg-brand-cream dark:text-black flex items-center justify-center group-hover:scale-110 transition-transform">↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- Sponsor -->
+<section id="sponsor" class="pb-24 pt-12">
+  <div class="app-container">
+    <div class="bg-brand-dark text-white dark:bg-brand-cream dark:text-black rounded-[5rem] p-16 md:p-32 text-center shadow-2xl reveal relative overflow-hidden">
+      <h2 class="font-serif font-bold mb-10 tracking-tighter z-10 relative" style="font-size: clamp(4rem, 8vw, 10rem);">Sponsor Us.</h2>
+      <div class="flex flex-wrap justify-center gap-10 z-10 relative">
+        <button class="px-20 py-8 bg-brand-accent text-white rounded-full font-bold text-2xl hover:scale-110 shadow-2xl transition-transform">Partner Now</button>
+      </div>
+    </div>
+  </div>
+</section>
