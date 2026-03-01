@@ -27,7 +27,10 @@ html, body { overflow-x: hidden; width: 100%; position: relative; }
     width: 100%;
     background: rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    margin: 6rem 0;
+    margin: 3rem 0;
+}
+@media (min-width: 768px) {
+    .shimmer-line { margin: 6rem 0; }
 }
 .dark .shimmer-line { background: rgba(255, 255, 255, 0.08); }
 .shimmer-line::after {
@@ -64,10 +67,13 @@ html, body { overflow-x: hidden; width: 100%; position: relative; }
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 4rem;
-    height: 5rem;
-    min-width: 15rem;
+    padding: 0 2rem;
+    height: 4rem;
+    min-width: 10rem;
     font-weight: 800;
+}
+@media (min-width: 768px) {
+    .marquee-item { padding: 0 4rem; height: 5rem; min-width: 15rem; }
 }
 
 /* --- UNIFORM CARD PHYSICS: PERFECT BORDER WRAP --- */

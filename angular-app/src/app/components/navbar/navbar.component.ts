@@ -10,11 +10,16 @@ import { AppStateService } from '../../services/app-state.service';
 })
 export class NavbarComponent {
   state = inject(AppStateService);
+  mobileMenuOpen = false;
 
   isHome = computed(() => this.state.view() === 'home');
   themeIcon = computed(() => this.state.theme() === 'dark' ? '☼' : '◐');
 
+  toggleMobileMenu() { this.mobileMenuOpen = !this.mobileMenuOpen; }
+  closeMobileMenu() { this.mobileMenuOpen = false; }
+
   scrollToSection(id: string) {
+    this.closeMobileMenu();
     if (this.state.view() !== 'home') this.state.navigateToHome();
     setTimeout(() => {
       const el = document.getElementById(id);

@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   typewriterText = '';
   private neuralChart: Chart | null = null;
   private neuralInterval: any;
+  private readonly snapSectionIds = ['hero-sec', 'achievements-sec', 'services-sec', 'resources-sec', 'sponsor'];
 
   achievementIds = ['analyzer', 'nexus', 'elastic'];
 
@@ -45,12 +46,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.initNeuralChart();
       this.handleReveal();
+      this.initScrollSnap();
     }, 100);
   }
 
   ngOnDestroy() {
     this.neuralChart?.destroy();
     clearInterval(this.neuralInterval);
+    this.destroyScrollSnap();
   }
 
   private initTypewriter() {
@@ -132,5 +135,26 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   moveSlider(dir: number) {
     this.state.moveSlider(dir, this.achievementIds.length);
+  }
+
+  private initScrollSnap() {
+    const navbarHeight = 80;
+    document.documentElement.style.scrollSnapType = 'y mandatory';
+    this.snapSectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.scrollSnapAlign = 'start';
+      el.style.scrollMarginTop = `${navbarHeight}px`;
+    });
+  }
+
+  private destroyScrollSnap() {
+    document.documentElement.style.scrollSnapType = '';
+    this.snapSectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.scrollSnapAlign = '';
+      el.style.scrollMarginTop = '';
+    });
   }
 }

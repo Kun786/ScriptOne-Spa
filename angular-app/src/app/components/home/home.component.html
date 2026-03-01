@@ -1,9 +1,9 @@
 <!-- HOME VIEW -->
 
 <!-- Hero -->
-<header class="min-h-screen flex flex-col justify-center pt-24">
+<header id="hero-sec" class="min-h-screen flex flex-col justify-center pt-24">
   <div class="app-container space-y-16 mb-24">
-    <h1 class="font-serif font-bold tracking-tighter leading-[0.9] lg:whitespace-nowrap" style="font-size: clamp(2.5rem, 6.5vw, 9.5rem);">
+    <h1 class="font-serif font-bold tracking-tighter leading-[0.9]" style="font-size: clamp(2rem, 6.5vw, 9.5rem);">
       <span>{{ typewriterText }}</span><span class="cursor-blink"></span> the <span class="text-brand-accent italic">Intelligent</span> Future.
     </h1>
     <div class="max-w-4xl reveal">
@@ -51,49 +51,49 @@
         </p>
       </div>
       <div class="flex gap-4 mb-4">
-        <button (click)="moveSlider(-1)" class="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">←</button>
-        <button (click)="moveSlider(1)"  class="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">→</button>
+        <button (click)="moveSlider(-1)" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-current flex items-center justify-center text-xl md:text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">←</button>
+        <button (click)="moveSlider(1)"  class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-current flex items-center justify-center text-xl md:text-2xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">→</button>
       </div>
     </div>
   </div>
 
   <div class="app-container">
-    <div class="slider-window" style="overflow: hidden;">
+    <div class="slider-window" style="overflow: hidden; padding: 70px 4px; margin: -70px -4px;">
       <div id="achievements-track" class="py-4" [style.transform]="sliderTransform()">
         <!-- Card 1 -->
         <div class="achievement-wrapper">
-          <div class="uniform-card p-14 cursor-pointer" (click)="state.navigateToDetail('analyzer')">
-            <div class="flex justify-between items-start mb-16">
+          <div class="uniform-card p-8 lg:p-14 cursor-pointer" (click)="state.navigateToDetail('analyzer')">
+            <div class="flex justify-between items-start mb-8 lg:mb-16">
               <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Infrastructure</span>
               <span class="text-4xl">↗</span>
             </div>
-            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">S1_Analyzer</h3>
-            <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">99.9% uptime achieved across 400+ distributed cluster nodes.</p>
-            <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+            <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-8 leading-tight">S1_Analyzer</h3>
+            <p class="opacity-70 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-12 leading-relaxed">99.9% uptime achieved across 400+ distributed cluster nodes.</p>
+            <div class="inline-block px-6 py-2.5 lg:px-8 lg:py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
           </div>
         </div>
         <!-- Card 2 -->
         <div class="achievement-wrapper">
-          <div class="uniform-card p-14 cursor-pointer" (click)="state.navigateToDetail('nexus')">
-            <div class="flex justify-between items-start mb-16">
+          <div class="uniform-card p-8 lg:p-14 cursor-pointer" (click)="state.navigateToDetail('nexus')">
+            <div class="flex justify-between items-start mb-8 lg:mb-16">
               <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Neural Mesh</span>
               <span class="text-4xl">↗</span>
             </div>
-            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Nexus_Mesh</h3>
-            <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">Sub-15ms overhead recorded for context-aware RAG pipelines.</p>
-            <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase text-brand-accent">Inspect</div>
+            <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-8 leading-tight">Nexus_Mesh</h3>
+            <p class="opacity-70 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-12 leading-relaxed">Sub-15ms overhead recorded for context-aware RAG pipelines.</p>
+            <div class="inline-block px-6 py-2.5 lg:px-8 lg:py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase text-brand-accent">Inspect</div>
           </div>
         </div>
         <!-- Card 3 -->
         <div class="achievement-wrapper">
-          <div class="uniform-card p-14 cursor-pointer" (click)="state.navigateToDetail('elastic')">
-            <div class="flex justify-between items-start mb-16">
+          <div class="uniform-card p-8 lg:p-14 cursor-pointer" (click)="state.navigateToDetail('elastic')">
+            <div class="flex justify-between items-start mb-8 lg:mb-16">
               <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Scaling</span>
               <span class="text-4xl">↗</span>
             </div>
-            <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Elastic Core</h3>
-            <p class="opacity-70 text-xl md:text-2xl mb-12 leading-relaxed">Global load balancing scaling to 12.5M concurrent requests.</p>
-            <div class="inline-block px-8 py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+            <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-8 leading-tight">Elastic Core</h3>
+            <p class="opacity-70 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-12 leading-relaxed">Global load balancing scaling to 12.5M concurrent requests.</p>
+            <div class="inline-block px-6 py-2.5 lg:px-8 lg:py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
           </div>
         </div>
       </div>
@@ -155,15 +155,15 @@
 
 <!-- Neural Core Break -->
 <div class="py-24 w-full flex justify-center items-center">
-  <div #expandingBox class="expanding-box bg-brand-dark dark:bg-brand-cream text-white dark:text-black w-[80%] h-[700px] rounded-[5rem] relative overflow-hidden shadow-2xl flex flex-col items-center justify-center">
+  <div #expandingBox class="expanding-box bg-brand-dark dark:bg-brand-cream text-white dark:text-black w-[95%] md:w-[85%] h-[280px] sm:h-[420px] lg:h-[700px] rounded-[2rem] md:rounded-[3.5rem] lg:rounded-[5rem] relative overflow-hidden shadow-2xl flex flex-col items-center justify-center">
     <div class="absolute inset-0 z-0 opacity-40 scale-125">
       <div class="chart-container h-full max-h-full w-full">
         <canvas #neuralChartCanvas></canvas>
       </div>
     </div>
-    <div class="z-10 text-center px-12 pointer-events-none">
-      <h2 class="font-serif font-bold mb-10 tracking-tighter" style="font-size: clamp(3.5rem, 6vw, 9rem);">Neural Core</h2>
-      <p class="font-light opacity-80 max-w-4xl mx-auto leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 3rem);">
+    <div class="z-10 text-center px-6 md:px-12 pointer-events-none">
+      <h2 class="font-serif font-bold mb-4 md:mb-10 tracking-tighter" style="font-size: clamp(2.5rem, 6vw, 9rem);">Neural Core</h2>
+      <p class="font-light opacity-80 max-w-4xl mx-auto leading-tight hidden sm:block" style="font-size: clamp(1rem, 2.5vw, 3rem);">
         Processing intelligence locally. Scroll to expand the system.
       </p>
     </div>
@@ -176,12 +176,12 @@
     <h2 class="font-serif font-bold tracking-tighter mb-6" style="font-size: clamp(3rem, 5vw, 7rem);">Resources.</h2>
   </div>
   <div class="app-container space-y-6 reveal">
-    <div class="flex flex-col md:flex-row items-center justify-between p-10 rounded-[3rem] border border-black/5 dark:border-white/5 bg-white/40 dark:bg-white/5 hover:border-brand-accent transition-all group">
-      <div class="mb-4 md:mb-0">
-        <h4 class="text-2xl font-bold mb-1">AI Readiness Framework</h4>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 md:p-10 rounded-[1.5rem] md:rounded-[3rem] border border-black/5 dark:border-white/5 bg-white/40 dark:bg-white/5 hover:border-brand-accent transition-all group gap-6 sm:gap-0">
+      <div>
+        <h4 class="text-xl md:text-2xl font-bold mb-1">AI Readiness Framework</h4>
         <p class="opacity-50 text-sm uppercase tracking-widest font-mono">PDF / 4.2MB / 2024 Audit</p>
       </div>
-      <button class="w-14 h-14 rounded-full bg-brand-dark text-white dark:bg-brand-cream dark:text-black flex items-center justify-center group-hover:scale-110 transition-transform">↓</button>
+      <button class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-brand-dark text-white dark:bg-brand-cream dark:text-black flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">↓</button>
     </div>
   </div>
 </section>
@@ -189,10 +189,10 @@
 <!-- Sponsor -->
 <section id="sponsor" class="pb-24 pt-12">
   <div class="app-container">
-    <div class="bg-brand-dark text-white dark:bg-brand-cream dark:text-black rounded-[5rem] p-16 md:p-32 text-center shadow-2xl reveal relative overflow-hidden">
-      <h2 class="font-serif font-bold mb-10 tracking-tighter z-10 relative" style="font-size: clamp(4rem, 8vw, 10rem);">Sponsor Us.</h2>
-      <div class="flex flex-wrap justify-center gap-10 z-10 relative">
-        <button class="px-20 py-8 bg-brand-accent text-white rounded-full font-bold text-2xl hover:scale-110 shadow-2xl transition-transform">Partner Now</button>
+    <div class="bg-brand-dark text-white dark:bg-brand-cream dark:text-black rounded-[2rem] md:rounded-[4rem] lg:rounded-[5rem] p-10 md:p-20 lg:p-32 text-center shadow-2xl reveal relative overflow-hidden">
+      <h2 class="font-serif font-bold mb-6 md:mb-10 tracking-tighter z-10 relative" style="font-size: clamp(2.5rem, 8vw, 10rem);">Sponsor Us.</h2>
+      <div class="flex flex-wrap justify-center gap-6 md:gap-10 z-10 relative">
+        <button class="px-8 py-5 md:px-14 md:py-7 lg:px-20 lg:py-8 bg-brand-accent text-white rounded-full font-bold text-lg md:text-xl lg:text-2xl hover:scale-110 shadow-2xl transition-transform">Partner Now</button>
       </div>
     </div>
   </div>
