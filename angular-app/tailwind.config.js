@@ -17,9 +17,9 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Outfit', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Roboto Mono', 'monospace'],
+        serif: ['Roboto Mono', 'monospace'],
+        mono: ['Roboto Mono', 'monospace'],
       }
     }
   },

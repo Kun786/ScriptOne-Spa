@@ -1,37 +1,367 @@
 <!-- HOME VIEW -->
 
 <!-- Hero -->
-<header id="hero-sec" class="min-h-screen flex flex-col justify-center pt-24">
-  <div class="app-container space-y-16 mb-24">
-    <h1 class="font-serif font-bold tracking-tighter leading-[0.9]" style="font-size: clamp(2rem, 6.5vw, 9.5rem);">
-      <span>{{ typewriterText }}</span><span class="cursor-blink"></span> the <span class="text-brand-accent italic">Intelligent</span> Future.
-    </h1>
-    <div class="max-w-4xl reveal">
-      <p class="font-light opacity-80 leading-tight" style="font-size: clamp(1.5rem, 2.5vw, 3rem);">
-        ScriptOne fuses advanced AI models with robust software engineering to deliver scalable digital ecosystems.
-      </p>
+<header id="hero-sec" class="h-screen flex flex-col -mt-20 lg:-mt-24 pt-20 lg:pt-24">
+  <div class="flex-1 min-h-0 flex items-center w-full overflow-hidden">
+  <div class="app-container w-full py-4">
+    <div class="hero-grid">
+
+      <!-- Left Column: Copy -->
+      <div class="hero-copy">
+        <h1 class="font-mono font-bold tracking-tighter leading-[0.92]" style="font-size: clamp(2rem, 4vw, 6.5rem);">
+          <span class="text-brand-accent heartbeat-pulse">One Agency.</span> WordPress, WooCommerce, Agentic AI Powered <span style="white-space:nowrap">Custom Web</span> Solutions.
+        </h1>
+        <div class="mt-4 lg:mt-6 reveal">
+          <p class="font-mono font-bold opacity-75 leading-snug" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+            ScriptOne builds custom WordPress websites, WooCommerce ecommerce stores, and Agentic AI-powered web applications — including CRM software, POS systems, and Medical Patient Portals — giving businesses a single trusted partner for every layer of their digital presence.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Service Widget -->
+      <div class="hero-widget-col">
+        <div class="hero-card reveal">
+          <div class="hero-card-content" [class.fading]="heroFading">
+
+            <!-- Illustration -->
+            <div class="hero-illus" [attr.data-service]="heroServices[heroServiceIndex].key" aria-hidden="true">
+              <div class="hi-panel hi-panel--a">
+                <span class="hi-dot"></span>
+                <div class="hi-icon-wrap">
+                  <ng-container [ngSwitch]="heroServices[heroServiceIndex].key">
+
+                    <!-- WordPress -->
+                    <svg *ngSwitchCase="'wp'" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="4" y="4" width="32" height="32" rx="5" stroke="currentColor" stroke-width="2"/>
+                      <path d="M11 16L15.5 26L20 18L24.5 26L29 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    <!-- WooCommerce -->
+                    <svg *ngSwitchCase="'woo'" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 9h4.5l3.5 17h18l3.5-13H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="17" cy="32" r="2.5" fill="currentColor"/>
+                      <circle cx="28" cy="32" r="2.5" fill="currentColor"/>
+                      <path d="M19 17v4M22 15v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+
+                    <!-- Custom Web App -->
+                    <svg *ngSwitchCase="'webapp'" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="7" width="34" height="26" rx="3" stroke="currentColor" stroke-width="2"/>
+                      <path d="M3 14h34" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="9.5" cy="10.5" r="1.5" fill="currentColor"/>
+                      <circle cx="15" cy="10.5" r="1.5" fill="currentColor"/>
+                      <path d="M14 23l-5 3.5 5 3.5M26 23l5 3.5-5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    <!-- Agentic AI -->
+                    <svg *ngSwitchCase="'ai'" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="20" cy="20" r="5.5" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="7"  cy="11" r="3" stroke="currentColor" stroke-width="1.8"/>
+                      <circle cx="33" cy="11" r="3" stroke="currentColor" stroke-width="1.8"/>
+                      <circle cx="7"  cy="29" r="3" stroke="currentColor" stroke-width="1.8"/>
+                      <circle cx="33" cy="29" r="3" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M10 13L15 17M25 17l5-5.5M10 27l5-4M25 23l5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+
+                  </ng-container>
+                </div>
+                <div class="hi-btn hi-btn--dark"></div>
+              </div>
+              <div class="hi-panel hi-panel--b">
+                <span class="hi-dot"></span>
+                <div class="hi-img"></div>
+                <div class="hi-btn hi-btn--accent"></div>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="hero-card-body">
+              <div>
+                <div class="kicker">{{ heroServices[heroServiceIndex].kicker }}</div>
+                <div class="hero-card-title">{{ heroServices[heroServiceIndex].name }}</div>
+                <div class="hero-card-desc">{{ heroServices[heroServiceIndex].desc }}</div>
+              </div>
+              <div class="hero-card-nav">
+                <button (click)="moveHeroService(-1)" class="hero-nav-btn" aria-label="Previous service">←</button>
+                <div class="hero-dots">
+                  <span
+                    *ngFor="let s of heroServices; let i = index"
+                    class="hero-dot"
+                    [class.active]="i === heroServiceIndex">
+                  </span>
+                </div>
+                <button (click)="moveHeroService(1)" class="hero-nav-btn" aria-label="Next service">→</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+  </div>
 
-  <!-- Featured In Loop -->
-  <div class="w-full bg-brand-dark/95 dark:bg-black py-14 border-y border-white/5">
+  <!-- Tech Stack Marquee -->
+  <div class="w-full bg-brand-dark/95 dark:bg-black py-4 border-t border-white/5">
     <div class="app-container">
-      <span class="block font-mono text-xs uppercase tracking-[0.4em] text-brand-accent font-bold mb-10 text-center">Featured In</span>
+      <span class="block font-mono text-xs uppercase tracking-[0.4em] text-brand-accent font-bold mb-2 text-center">Tech Arsenal</span>
       <div class="marquee-container">
         <div class="marquee-track">
-          <div class="marquee-item font-serif italic text-3xl text-brand-accent">FOX 31</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">KOIN 6</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-accent">NBC 4</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">NEWS 8</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-accent">TNH TECH</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">DENVER POST</div>
-          <!-- Duplicate for seamless loop -->
-          <div class="marquee-item font-serif italic text-3xl text-brand-accent">FOX 31</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">KOIN 6</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-accent">NBC 4</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">NEWS 8</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-accent">TNH TECH</div>
-          <div class="marquee-item font-serif italic text-3xl text-brand-cream opacity-50">DENVER POST</div>
+          <!-- ── PRIMARY SET ── -->
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#3178C6"><img class="marquee-icon" src="https://cdn.simpleicons.org/typescript/3178C6" alt="" aria-hidden="true">TypeScript</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#F7DF1E"><img class="marquee-icon" src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" aria-hidden="true">JavaScript ES6+</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#DD0031"><img class="marquee-icon" src="https://cdn.simpleicons.org/angular/DD0031" alt="" aria-hidden="true">MEAN Stack</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#61DAFB"><img class="marquee-icon" src="https://cdn.simpleicons.org/react/61DAFB" alt="" aria-hidden="true">MERN Stack</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#DD0031"><img class="marquee-icon" src="https://cdn.simpleicons.org/angular/DD0031" alt="" aria-hidden="true">Angular 2+</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/nextdotjs/c4c4c4" alt="" aria-hidden="true">Next.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#68A063"><img class="marquee-icon" src="https://cdn.simpleicons.org/nodedotjs/68A063" alt="" aria-hidden="true">Node.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E0234E"><img class="marquee-icon" src="https://cdn.simpleicons.org/nestjs/E0234E" alt="" aria-hidden="true">Nest.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/express/c4c4c4" alt="" aria-hidden="true">Express.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#21759B"><img class="marquee-icon" src="https://cdn.simpleicons.org/wordpress/21759B" alt="" aria-hidden="true">WordPress CMS</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#96588A"><img class="marquee-icon" src="https://cdn.simpleicons.org/woocommerce/96588A" alt="" aria-hidden="true">WooCommerce</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#777BB4"><img class="marquee-icon" src="https://cdn.simpleicons.org/php/777BB4" alt="" aria-hidden="true">PHP</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c0765a"><img class="marquee-icon" src="https://cdn.simpleicons.org/mariadb/c0765a" alt="" aria-hidden="true">MariaDB</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E2003B"><img class="marquee-icon" src="https://cdn.simpleicons.org/elementor/E2003B" alt="" aria-hidden="true">Elementor Pro</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#21759B"><img class="marquee-icon" src="https://cdn.simpleicons.org/wordpress/21759B" alt="" aria-hidden="true">YITH Plugins</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#626CD9"><img class="marquee-icon" src="https://cdn.simpleicons.org/stripe/626CD9" alt="" aria-hidden="true">Stripe</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#169BD7"><img class="marquee-icon" src="https://cdn.simpleicons.org/paypal/169BD7" alt="" aria-hidden="true">PayPal</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#528FF0"><img class="marquee-icon" src="https://cdn.simpleicons.org/razorpay/528FF0" alt="" aria-hidden="true">Razorpay</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#21759B"><img class="marquee-icon" src="https://cdn.simpleicons.org/wordpress/21759B" alt="" aria-hidden="true">Custom Theme Dev</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#96588A"><img class="marquee-icon" src="https://cdn.simpleicons.org/woocommerce/96588A" alt="" aria-hidden="true">Custom Plugin Dev</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#47A248"><img class="marquee-icon" src="https://cdn.simpleicons.org/mongodb/47A248" alt="" aria-hidden="true">MongoDB</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4169E1"><img class="marquee-icon" src="https://cdn.simpleicons.org/postgresql/4169E1" alt="" aria-hidden="true">PostgreSQL</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4479A1"><img class="marquee-icon" src="https://cdn.simpleicons.org/mysql/4479A1" alt="" aria-hidden="true">MySQL</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E10098"><img class="marquee-icon" src="https://cdn.simpleicons.org/graphql/E10098" alt="" aria-hidden="true">GraphQL</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#ffffff"><img class="marquee-icon" src="https://cdn.simpleicons.org/openai/ffffff" alt="" aria-hidden="true">OpenAI</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#8E75B2"><img class="marquee-icon" src="https://cdn.simpleicons.org/googlegemini/8E75B2" alt="" aria-hidden="true">Google Gemini</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#F3F1E7"><img class="marquee-icon" src="https://cdn.simpleicons.org/cursor/F3F1E7" alt="" aria-hidden="true">Cursor AI</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#D4A27F"><img class="marquee-icon" src="https://cdn.simpleicons.org/anthropic/D4A27F" alt="" aria-hidden="true">Claude Code</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#2496ED"><img class="marquee-icon" src="https://cdn.simpleicons.org/docker/2496ED" alt="" aria-hidden="true">Docker</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#326CE5"><img class="marquee-icon" src="https://cdn.simpleicons.org/kubernetes/326CE5" alt="" aria-hidden="true">Kubernetes</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#FF9900"><img class="marquee-icon" src="https://cdn.simpleicons.org/amazonwebservices/FF9900" alt="" aria-hidden="true">AWS</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4285F4"><img class="marquee-icon" src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="" aria-hidden="true">Google Cloud</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#50AFFF"><img class="marquee-icon" src="https://cdn.simpleicons.org/microsoftazure/0078D4" alt="" aria-hidden="true">Azure</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/socketdotio/c4c4c4" alt="" aria-hidden="true">WebSockets</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#D97757"><img class="marquee-icon" src="https://cdn.simpleicons.org/jsonwebtokens/D97757" alt="" aria-hidden="true">JWT · OAuth</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#2088FF"><img class="marquee-icon" src="https://cdn.simpleicons.org/githubactions/2088FF" alt="" aria-hidden="true">GitHub Actions</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/nginx/c4c4c4" alt="" aria-hidden="true">NGINX</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E34F26"><img class="marquee-icon" src="https://cdn.simpleicons.org/html5/E34F26" alt="" aria-hidden="true">HTML5</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#1572B6"><img class="marquee-icon" src="https://cdn.simpleicons.org/css3/1572B6" alt="" aria-hidden="true">CSS3</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#06B6D4"><img class="marquee-icon" src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="" aria-hidden="true">Tailwind CSS</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#7952B3"><img class="marquee-icon" src="https://cdn.simpleicons.org/bootstrap/7952B3" alt="" aria-hidden="true">Bootstrap</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#880000"><img class="marquee-icon" src="https://cdn.simpleicons.org/mongoose/880000" alt="" aria-hidden="true">Mongoose ODM</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#47A248"><img class="marquee-icon" src="https://cdn.simpleicons.org/mongodb/47A248" alt="" aria-hidden="true">MongoAtlas</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">Passport.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">RESTful APIs</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">AI Agent Dev</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">Prompt Engineering</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#F05032"><img class="marquee-icon" src="https://cdn.simpleicons.org/git/F05032" alt="" aria-hidden="true">Git</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/github/c4c4c4" alt="" aria-hidden="true">GitHub</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#007ACC"><img class="marquee-icon" src="https://cdn.simpleicons.org/visualstudiocode/007ACC" alt="" aria-hidden="true">VSCode</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#DD0031"><img class="marquee-icon" src="https://cdn.simpleicons.org/angular/DD0031" alt="" aria-hidden="true">Angular CLI</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#CB3837"><img class="marquee-icon" src="https://cdn.simpleicons.org/npm/CB3837" alt="" aria-hidden="true">NPM</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#FF6C37"><img class="marquee-icon" src="https://cdn.simpleicons.org/postman/FF6C37" alt="" aria-hidden="true">Postman</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#85EA2D"><img class="marquee-icon" src="https://cdn.simpleicons.org/swagger/85EA2D" alt="" aria-hidden="true">Swagger</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#0080FF"><img class="marquee-icon" src="https://cdn.simpleicons.org/digitalocean/0080FF" alt="" aria-hidden="true">DigitalOcean</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#9E7CC1"><img class="marquee-icon" src="https://cdn.simpleicons.org/heroku/9E7CC1" alt="" aria-hidden="true">Heroku</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/vercel/c4c4c4" alt="" aria-hidden="true">Vercel</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#00C7B7"><img class="marquee-icon" src="https://cdn.simpleicons.org/netlify/00C7B7" alt="" aria-hidden="true">Netlify</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E95420"><img class="marquee-icon" src="https://cdn.simpleicons.org/ubuntu/E95420" alt="" aria-hidden="true">Ubuntu</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#7B42BC"><img class="marquee-icon" src="https://cdn.simpleicons.org/terraform/7B42BC" alt="" aria-hidden="true">Terraform</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#FFEC6E"><img class="marquee-icon" src="https://cdn.simpleicons.org/vault/FFEC6E" alt="" aria-hidden="true">Vault</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4EAA25"><img class="marquee-icon" src="https://cdn.simpleicons.org/gnubash/4EAA25" alt="" aria-hidden="true">Shell Scripting</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">CI/CD Pipelines</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <!-- ── DUPLICATE SET (seamless loop) ── -->
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#3178C6"><img class="marquee-icon" src="https://cdn.simpleicons.org/typescript/3178C6" alt="" aria-hidden="true">TypeScript</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#F7DF1E"><img class="marquee-icon" src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" aria-hidden="true">JavaScript ES6+</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#DD0031"><img class="marquee-icon" src="https://cdn.simpleicons.org/angular/DD0031" alt="" aria-hidden="true">MEAN Stack</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#61DAFB"><img class="marquee-icon" src="https://cdn.simpleicons.org/react/61DAFB" alt="" aria-hidden="true">MERN Stack</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#DD0031"><img class="marquee-icon" src="https://cdn.simpleicons.org/angular/DD0031" alt="" aria-hidden="true">Angular 2+</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/nextdotjs/c4c4c4" alt="" aria-hidden="true">Next.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#68A063"><img class="marquee-icon" src="https://cdn.simpleicons.org/nodedotjs/68A063" alt="" aria-hidden="true">Node.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E0234E"><img class="marquee-icon" src="https://cdn.simpleicons.org/nestjs/E0234E" alt="" aria-hidden="true">Nest.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/express/c4c4c4" alt="" aria-hidden="true">Express.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#21759B"><img class="marquee-icon" src="https://cdn.simpleicons.org/wordpress/21759B" alt="" aria-hidden="true">WordPress CMS</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#96588A"><img class="marquee-icon" src="https://cdn.simpleicons.org/woocommerce/96588A" alt="" aria-hidden="true">WooCommerce</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#777BB4"><img class="marquee-icon" src="https://cdn.simpleicons.org/php/777BB4" alt="" aria-hidden="true">PHP</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c0765a"><img class="marquee-icon" src="https://cdn.simpleicons.org/mariadb/c0765a" alt="" aria-hidden="true">MariaDB</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E2003B"><img class="marquee-icon" src="https://cdn.simpleicons.org/elementor/E2003B" alt="" aria-hidden="true">Elementor Pro</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#21759B"><img class="marquee-icon" src="https://cdn.simpleicons.org/wordpress/21759B" alt="" aria-hidden="true">YITH Plugins</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#626CD9"><img class="marquee-icon" src="https://cdn.simpleicons.org/stripe/626CD9" alt="" aria-hidden="true">Stripe</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#169BD7"><img class="marquee-icon" src="https://cdn.simpleicons.org/paypal/169BD7" alt="" aria-hidden="true">PayPal</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#528FF0"><img class="marquee-icon" src="https://cdn.simpleicons.org/razorpay/528FF0" alt="" aria-hidden="true">Razorpay</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#21759B"><img class="marquee-icon" src="https://cdn.simpleicons.org/wordpress/21759B" alt="" aria-hidden="true">Custom Theme Dev</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#96588A"><img class="marquee-icon" src="https://cdn.simpleicons.org/woocommerce/96588A" alt="" aria-hidden="true">Custom Plugin Dev</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#47A248"><img class="marquee-icon" src="https://cdn.simpleicons.org/mongodb/47A248" alt="" aria-hidden="true">MongoDB</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4169E1"><img class="marquee-icon" src="https://cdn.simpleicons.org/postgresql/4169E1" alt="" aria-hidden="true">PostgreSQL</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4479A1"><img class="marquee-icon" src="https://cdn.simpleicons.org/mysql/4479A1" alt="" aria-hidden="true">MySQL</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E10098"><img class="marquee-icon" src="https://cdn.simpleicons.org/graphql/E10098" alt="" aria-hidden="true">GraphQL</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#ffffff"><img class="marquee-icon" src="https://cdn.simpleicons.org/openai/ffffff" alt="" aria-hidden="true">OpenAI</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#8E75B2"><img class="marquee-icon" src="https://cdn.simpleicons.org/googlegemini/8E75B2" alt="" aria-hidden="true">Google Gemini</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#F3F1E7"><img class="marquee-icon" src="https://cdn.simpleicons.org/cursor/F3F1E7" alt="" aria-hidden="true">Cursor AI</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#D4A27F"><img class="marquee-icon" src="https://cdn.simpleicons.org/anthropic/D4A27F" alt="" aria-hidden="true">Claude Code</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#2496ED"><img class="marquee-icon" src="https://cdn.simpleicons.org/docker/2496ED" alt="" aria-hidden="true">Docker</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#326CE5"><img class="marquee-icon" src="https://cdn.simpleicons.org/kubernetes/326CE5" alt="" aria-hidden="true">Kubernetes</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#FF9900"><img class="marquee-icon" src="https://cdn.simpleicons.org/amazonwebservices/FF9900" alt="" aria-hidden="true">AWS</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4285F4"><img class="marquee-icon" src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="" aria-hidden="true">Google Cloud</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#50AFFF"><img class="marquee-icon" src="https://cdn.simpleicons.org/microsoftazure/0078D4" alt="" aria-hidden="true">Azure</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/socketdotio/c4c4c4" alt="" aria-hidden="true">WebSockets</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#D97757"><img class="marquee-icon" src="https://cdn.simpleicons.org/jsonwebtokens/D97757" alt="" aria-hidden="true">JWT · OAuth</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#2088FF"><img class="marquee-icon" src="https://cdn.simpleicons.org/githubactions/2088FF" alt="" aria-hidden="true">GitHub Actions</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/nginx/c4c4c4" alt="" aria-hidden="true">NGINX</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E34F26"><img class="marquee-icon" src="https://cdn.simpleicons.org/html5/E34F26" alt="" aria-hidden="true">HTML5</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#1572B6"><img class="marquee-icon" src="https://cdn.simpleicons.org/css3/1572B6" alt="" aria-hidden="true">CSS3</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#06B6D4"><img class="marquee-icon" src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="" aria-hidden="true">Tailwind CSS</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#7952B3"><img class="marquee-icon" src="https://cdn.simpleicons.org/bootstrap/7952B3" alt="" aria-hidden="true">Bootstrap</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#880000"><img class="marquee-icon" src="https://cdn.simpleicons.org/mongoose/880000" alt="" aria-hidden="true">Mongoose ODM</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#47A248"><img class="marquee-icon" src="https://cdn.simpleicons.org/mongodb/47A248" alt="" aria-hidden="true">MongoAtlas</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">Passport.js</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">RESTful APIs</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">AI Agent Dev</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">Prompt Engineering</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#F05032"><img class="marquee-icon" src="https://cdn.simpleicons.org/git/F05032" alt="" aria-hidden="true">Git</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/github/c4c4c4" alt="" aria-hidden="true">GitHub</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#007ACC"><img class="marquee-icon" src="https://cdn.simpleicons.org/visualstudiocode/007ACC" alt="" aria-hidden="true">VSCode</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#DD0031"><img class="marquee-icon" src="https://cdn.simpleicons.org/angular/DD0031" alt="" aria-hidden="true">Angular CLI</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#CB3837"><img class="marquee-icon" src="https://cdn.simpleicons.org/npm/CB3837" alt="" aria-hidden="true">NPM</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#FF6C37"><img class="marquee-icon" src="https://cdn.simpleicons.org/postman/FF6C37" alt="" aria-hidden="true">Postman</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#85EA2D"><img class="marquee-icon" src="https://cdn.simpleicons.org/swagger/85EA2D" alt="" aria-hidden="true">Swagger</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#0080FF"><img class="marquee-icon" src="https://cdn.simpleicons.org/digitalocean/0080FF" alt="" aria-hidden="true">DigitalOcean</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#9E7CC1"><img class="marquee-icon" src="https://cdn.simpleicons.org/heroku/9E7CC1" alt="" aria-hidden="true">Heroku</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4"><img class="marquee-icon" src="https://cdn.simpleicons.org/vercel/c4c4c4" alt="" aria-hidden="true">Vercel</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#00C7B7"><img class="marquee-icon" src="https://cdn.simpleicons.org/netlify/00C7B7" alt="" aria-hidden="true">Netlify</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#E95420"><img class="marquee-icon" src="https://cdn.simpleicons.org/ubuntu/E95420" alt="" aria-hidden="true">Ubuntu</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#7B42BC"><img class="marquee-icon" src="https://cdn.simpleicons.org/terraform/7B42BC" alt="" aria-hidden="true">Terraform</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#FFEC6E"><img class="marquee-icon" src="https://cdn.simpleicons.org/vault/FFEC6E" alt="" aria-hidden="true">Vault</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#4EAA25"><img class="marquee-icon" src="https://cdn.simpleicons.org/gnubash/4EAA25" alt="" aria-hidden="true">Shell Scripting</div>
+          <div class="marquee-item marquee-sep">✦</div>
+          <div class="marquee-item font-mono font-bold text-sm" style="color:#c4c4c4">CI/CD Pipelines</div>
+          <div class="marquee-item marquee-sep">✦</div>
         </div>
       </div>
     </div>
@@ -45,9 +375,9 @@
   <div class="app-container reveal mb-20 relative">
     <div class="flex flex-col md:flex-row justify-between items-end gap-12">
       <div class="flex-1">
-        <h2 class="font-serif font-bold tracking-tighter mb-8" style="font-size: clamp(3.5rem, 6vw, 8.5rem);">Achievements.</h2>
-        <p class="opacity-60 max-w-3xl leading-snug" style="font-size: clamp(1.25rem, 2.2vw, 2.5rem);">
-          High-throughput architectural milestones from our latest production deployments.
+        <h2 class="font-mono font-bold tracking-tighter mb-8 text-brand-accent heartbeat-pulse" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">Achievements.</h2>
+        <p class="font-mono font-bold opacity-60 max-w-3xl leading-snug" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+          Browse our portfolio of successfully completed projects — from custom WordPress websites and WooCommerce ecommerce stores to Agentic AI systems and custom web applications delivered for clients across industries.
         </p>
       </div>
       <div class="flex gap-4 mb-4">
@@ -60,40 +390,58 @@
   <div class="app-container">
     <div class="slider-window" style="overflow: hidden; padding: 70px 4px; margin: -70px -4px;">
       <div id="achievements-track" class="py-4" [style.transform]="sliderTransform()">
-        <!-- Card 1 -->
-        <div class="achievement-wrapper">
-          <div class="uniform-card p-8 lg:p-14 cursor-pointer" (click)="state.navigateToDetail('analyzer')">
-            <div class="flex justify-between items-start mb-8 lg:mb-16">
-              <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Infrastructure</span>
-              <span class="text-4xl">↗</span>
+        <div class="achievement-wrapper" *ngFor="let project of portfolioProjects">
+          <div class="uniform-card portfolio-card p-8 lg:p-10 flex flex-col">
+
+            <!-- ── Header: Logo + meta + Visit link ── -->
+            <div class="flex items-start justify-between mb-5 gap-4">
+              <div class="flex items-center gap-3">
+                <!-- Local logo or project initial fallback -->
+                <div class="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center bg-black/5 dark:bg-white/5">
+                  <img *ngIf="project.logo" [src]="project.logo" [alt]="project.title + ' logo'"
+                       class="w-full h-full object-contain p-1.5">
+                  <span *ngIf="!project.logo"
+                        class="text-2xl font-black leading-none"
+                        [style.color]="project.id === 'humanoid' ? '#25D366' : '#D97757'">
+                    {{ project.id === 'humanoid' ? 'H' : (project.id === 'radstudy' ? 'G' : (project.title.charAt(0) || 'S')) }}
+                  </span>
+                </div>
+                <div>
+                  <span class="font-mono text-xs uppercase tracking-widest opacity-40 font-bold block">{{ project.platform }}</span>
+                  <span class="font-mono text-xs font-bold" style="color:#D97757;">{{ project.market }}</span>
+                </div>
+              </div>
+              <a [href]="project.url" target="_blank" rel="noopener noreferrer"
+                 class="flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full border border-current text-xs font-bold opacity-40 hover:opacity-100 hover:border-brand-accent hover:text-brand-accent transition-all"
+                 (click)="$event.stopPropagation()">
+                Visit ↗
+              </a>
             </div>
-            <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-8 leading-tight">S1_Analyzer</h3>
-            <p class="opacity-70 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-12 leading-relaxed">99.9% uptime achieved across 400+ distributed cluster nodes.</p>
-            <div class="inline-block px-6 py-2.5 lg:px-8 lg:py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="achievement-wrapper">
-          <div class="uniform-card p-8 lg:p-14 cursor-pointer" (click)="state.navigateToDetail('nexus')">
-            <div class="flex justify-between items-start mb-8 lg:mb-16">
-              <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Neural Mesh</span>
-              <span class="text-4xl">↗</span>
+
+            <!-- ── Title + Category ── -->
+            <h3 class="text-2xl md:text-3xl font-bold mb-2 leading-tight">{{ project.title }}</h3>
+            <span class="inline-block self-start mb-4 px-3 py-0.5 rounded-full text-xs font-bold tracking-widest uppercase border border-current opacity-30">{{ project.category }}</span>
+
+            <!-- ── Owner + Completion ── -->
+            <div class="flex flex-wrap gap-x-5 gap-y-1 mb-4 font-mono text-xs opacity-50">
+              <span>👤 {{ project.owner }}</span>
+              <span>✓ {{ project.completion }}</span>
             </div>
-            <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-8 leading-tight">Nexus_Mesh</h3>
-            <p class="opacity-70 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-12 leading-relaxed">Sub-15ms overhead recorded for context-aware RAG pipelines.</p>
-            <div class="inline-block px-6 py-2.5 lg:px-8 lg:py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase text-brand-accent">Inspect</div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="achievement-wrapper">
-          <div class="uniform-card p-8 lg:p-14 cursor-pointer" (click)="state.navigateToDetail('elastic')">
-            <div class="flex justify-between items-start mb-8 lg:mb-16">
-              <span class="font-mono text-sm uppercase tracking-widest opacity-40 font-bold">Scaling</span>
-              <span class="text-4xl">↗</span>
+
+            <!-- ── Description ── -->
+            <p class="opacity-65 text-sm leading-relaxed mb-5">{{ project.description }}</p>
+
+            <!-- ── Tech Stack Capsules ── -->
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span *ngFor="let tech of project.techStack" class="portfolio-tech-capsule">{{ tech }}</span>
             </div>
-            <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-8 leading-tight">Elastic Core</h3>
-            <p class="opacity-70 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-12 leading-relaxed">Global load balancing scaling to 12.5M concurrent requests.</p>
-            <div class="inline-block px-6 py-2.5 lg:px-8 lg:py-3 bg-brand-cream dark:bg-black rounded-full text-xs font-bold tracking-widest uppercase">Inspect</div>
+
+            <!-- ── Owner Feedback ── -->
+            <div class="mt-auto border-t border-black/8 dark:border-white/8 pt-4">
+              <p class="text-xs opacity-50 italic leading-relaxed">"{{ project.feedback }}"</p>
+              <p class="text-xs font-bold opacity-35 mt-1.5 font-mono">— {{ project.owner }}</p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -106,47 +454,147 @@
 <!-- Services Section -->
 <section id="services-sec" class="min-h-screen flex flex-col justify-center py-24">
   <div class="app-container reveal mb-16">
-    <h2 class="font-serif font-bold tracking-tighter mb-4" style="font-size: clamp(3rem, 5vw, 7rem);">Services.</h2>
-    <p class="opacity-50 text-xl font-light">End-to-end engineering and the technologies that power our architectures.</p>
+    <h2 class="font-mono font-bold tracking-tighter mb-4 text-brand-accent heartbeat-pulse" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">Services.</h2>
+    <p class="font-mono font-bold opacity-85 mb-3" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">Everything Your Business Needs — WordPress, WooCommerce &amp; AI-Powered Web Solutions.</p>
+    <p class="font-mono font-bold opacity-55 max-w-6xl leading-relaxed" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+      ScriptOne is a full-service digital agency building custom WordPress websites, WooCommerce and Magento ecommerce stores, and Agentic AI-powered web applications — including CRM systems, POS platforms, and Medical Portals. One agency, every layer of your digital presence, built to perform.
+    </p>
   </div>
 
-  <!-- Disciplines Grid -->
-  <div class="app-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal mb-24">
+  <!-- Services Cards -->
+  <div class="app-container grid grid-cols-1 md:grid-cols-2 gap-6 reveal mb-20">
     <div class="uniform-card p-10 group">
-      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">✦</div>
-      <h4 class="text-xl font-bold mb-4">Generative AI</h4>
-      <p class="text-sm opacity-50 leading-relaxed">Custom LLM fine-tuning and secure contextual memory pipelines.</p>
-    </div>
-    <div class="uniform-card p-10 group">
-      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◈</div>
-      <h4 class="text-xl font-bold mb-4">Core Software</h4>
-      <p class="text-sm opacity-50 leading-relaxed">High-performance Rust systems built for horizontal edge scale.</p>
-    </div>
-    <div class="uniform-card p-10 group">
-      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◉</div>
-      <h4 class="text-xl font-bold mb-4">Headless CMS</h4>
-      <p class="text-sm opacity-50 leading-relaxed">Decoupling WordPress with Next.js for sub-100ms LCP.</p>
-    </div>
-    <div class="uniform-card p-10 group">
-      <div class="text-brand-accent text-3xl mb-8 group-hover:scale-125 transition-transform">◍</div>
-      <h4 class="text-xl font-bold mb-4">Cloud Native</h4>
-      <p class="text-sm opacity-50 leading-relaxed">Serverless architectures and global edge deployments.</p>
-    </div>
-  </div>
-
-  <!-- Supercharged Stack -->
-  <div class="app-container reveal mb-12">
-    <h2 class="font-serif font-bold tracking-tighter mb-4" style="font-size: clamp(3rem, 5vw, 7rem);">Supercharged Stack.</h2>
-    <p class="opacity-40 text-sm uppercase tracking-widest font-mono">Modern frameworks integrated with precision</p>
-  </div>
-
-  <!-- Tech Capsules -->
-  <div class="app-container flex flex-wrap gap-4 reveal">
-    <div class="tech-capsule" *ngFor="let tech of state.techStack">
-      <div class="tech-icon-box" [style.background-color]="tech.bg" [style.color]="tech.color">
-        {{ tech.icon }}
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-black/5 dark:bg-white/10">
+          <img class="w-8 h-8" src="/services/wordpress.svg" alt="WordPress icon" aria-hidden="true">
       </div>
-      <span class="tech-name text-sm font-bold text-black dark:text-white">{{ tech.name }}</span>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent font-bold mb-4">CUSTOM WORDPRESS WEBSITE DEVELOPMENT</p>
+      <h4 class="font-mono font-bold mb-4" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">WordPress Websites</h4>
+      <p class="font-mono font-bold text-sm opacity-60 leading-relaxed mb-8">
+        Business websites, landing pages, service pages, blogs, and lead generation — built with clean block-based architecture so your team can manage and grow content with ease.
+      </p>
+      <button type="button"
+              (click)="openConsultWithService('WordPress Websites')"
+              class="inline-flex items-center gap-2 font-mono font-bold text-xs uppercase tracking-[0.16em] px-5 py-2.5 rounded-full border border-current hover:border-brand-accent hover:text-brand-accent transition-all">
+        Build My Website <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+
+    <div class="uniform-card p-10 group">
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-black/5 dark:bg-white/10">
+        <img class="w-8 h-8" src="/services/ecommerce.svg" alt="Ecommerce icon" aria-hidden="true">
+      </div>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent font-bold mb-4">ECOMMERCE STORE DEVELOPMENT</p>
+      <h4 class="font-mono font-bold mb-4" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">Ecommerce Store</h4>
+      <p class="font-mono font-bold text-sm opacity-60 leading-relaxed mb-8">
+        We use WooCommerce and Magento to set up high-converting ecommerce stores — including product catalog, variations, collections, coupons, cart &amp; checkout UX, transactional emails, and end-to-end order management workflows.
+      </p>
+      <button type="button"
+              (click)="openConsultWithService('Ecommerce Store')"
+              class="inline-flex items-center gap-2 font-mono font-bold text-xs uppercase tracking-[0.16em] px-5 py-2.5 rounded-full border border-current hover:border-brand-accent hover:text-brand-accent transition-all">
+        Build My Store <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+
+    <div class="uniform-card p-10 group">
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-black/5 dark:bg-white/10">
+        <img class="w-8 h-8" src="/services/ai.svg" alt="AI icon" aria-hidden="true">
+      </div>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent font-bold mb-4">AGENTIC AI POWERED CUSTOM WEB APPLICATION DEVELOPMENT</p>
+      <h4 class="font-mono font-bold mb-4" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">AI-Powered Custom Web Applications</h4>
+      <p class="font-mono font-bold text-sm opacity-60 leading-relaxed mb-8">
+        We build intelligent, Agentic AI-powered custom web applications tailored to your business — including CRM systems, POS platforms, Medical Patient Portals, business automation tools, and any bespoke digital solution your operations demand.
+      </p>
+      <button type="button"
+              (click)="openConsultWithService('AI-Powered Custom Web Applications')"
+              class="inline-flex items-center gap-2 font-mono font-bold text-xs uppercase tracking-[0.16em] px-5 py-2.5 rounded-full border border-current hover:border-brand-accent hover:text-brand-accent transition-all">
+        Scope My Application <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+
+    <div class="uniform-card p-10 group">
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-black/5 dark:bg-white/10">
+        <img class="w-8 h-8" src="/services/devops-cloud.svg" alt="DevOps and cloud icon" aria-hidden="true">
+      </div>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent font-bold mb-4">DEVOPS · CLOUD · CI/CD · INTEGRATIONS</p>
+      <h4 class="font-mono font-bold mb-4" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">DevOps, Cloud Infrastructure &amp; Integrations</h4>
+      <p class="font-mono font-bold text-sm opacity-60 leading-relaxed mb-4">
+        We deploy and maintain production-grade infrastructure across AWS, Google Cloud, Microsoft Azure, DigitalOcean, Heroku, Vercel, and Netlify — containerized with Docker &amp; Kubernetes, automated via GitHub Actions, Terraform, and CI/CD pipelines, and secured with Vault &amp; NGINX.
+      </p>
+      <p class="font-mono font-bold text-sm opacity-60 leading-relaxed mb-8">
+        Development is accelerated using Claude Code and Cursor AI for Agentic AI-assisted engineering. Every project ships with essential third-party integrations — Stripe, PayPal, GetResponse, and other leading platforms — wired cleanly into your application from day one.
+      </p>
+      <button type="button"
+              (click)="openConsultWithService('DevOps, Cloud Infrastructure & Integrations')"
+              class="inline-flex items-center gap-2 font-mono font-bold text-xs uppercase tracking-[0.16em] px-5 py-2.5 rounded-full border border-current hover:border-brand-accent hover:text-brand-accent transition-all">
+        Review Infrastructure <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- What You Get -->
+  <div class="app-container reveal mb-6">
+    <h3 class="font-mono font-bold tracking-tighter text-brand-accent heartbeat-pulse" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">What You Get.</h3>
+  </div>
+  <div class="app-container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 reveal">
+    <div class="uniform-card p-8">
+      <div class="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center mb-3">
+        <img src="/services/get-1.svg" alt="" aria-hidden="true" class="w-6 h-6">
+      </div>
+      <p class="font-mono font-black mb-3 text-3xl" style="color:#21759B;">01</p>
+      <h4 class="font-mono font-bold mb-3" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">WordPress &amp; WooCommerce Live</h4>
+      <p class="font-mono font-bold text-sm opacity-55 leading-relaxed">A fully built, tested WordPress website or WooCommerce store — pages, products, and checkout ready to go.</p>
+    </div>
+    <div class="uniform-card p-8">
+      <div class="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center mb-3">
+        <img src="/services/get-2.svg" alt="" aria-hidden="true" class="w-6 h-6">
+      </div>
+      <p class="font-mono font-black mb-3 text-3xl" style="color:#8E75B2;">02</p>
+      <h4 class="font-mono font-bold mb-3" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">AI App &amp; Custom Solution Shipped</h4>
+      <p class="font-mono font-bold text-sm opacity-55 leading-relaxed">Your Agentic AI-powered CRM, POS, Medical Portal, or custom web application — developed, tested, and production-ready.</p>
+    </div>
+    <div class="uniform-card p-8">
+      <div class="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center mb-3">
+        <img src="/services/get-3.svg" alt="" aria-hidden="true" class="w-6 h-6">
+      </div>
+      <p class="font-mono font-black mb-3 text-3xl" style="color:#4285F4;">03</p>
+      <h4 class="font-mono font-bold mb-3" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">Cloud, DevOps &amp; Integrations Active</h4>
+      <p class="font-mono font-bold text-sm opacity-55 leading-relaxed">Infrastructure deployed, CI/CD pipelines running, and Stripe, PayPal, GetResponse, and all key integrations wired and verified.</p>
+    </div>
+    <div class="uniform-card p-8">
+      <div class="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center mb-3">
+        <img src="/services/get-4.svg" alt="" aria-hidden="true" class="w-6 h-6">
+      </div>
+      <p class="font-mono font-black mb-3 text-3xl" style="color:#D97757;">04</p>
+      <h4 class="font-mono font-bold mb-3" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">Handoff &amp; You're in Control</h4>
+      <p class="font-mono font-bold text-sm opacity-55 leading-relaxed">Full documentation, admin training, and maintainable build guides — so your team owns and runs everything confidently from day one.</p>
+    </div>
+  </div>
+</section>
+
+<div class="app-container"><div class="shimmer-line"></div></div>
+
+<!-- Technologies -->
+<section id="technologies-sec" class="flex flex-col justify-center py-20">
+  <div class="app-container reveal mb-12">
+    <h2 class="font-mono font-bold tracking-tighter mb-4 text-brand-accent heartbeat-pulse" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">Technologies.</h2>
+    <p class="font-mono font-bold opacity-60 max-w-4xl leading-snug" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+      Deep expertise across custom WordPress websites, WooCommerce ecommerce development, Agentic AI-powered web applications — including CRM systems, POS platforms, and Medical Portals — backed by modern cloud infrastructure, DevOps automation, and full-stack web technologies.
+    </p>
+  </div>
+  <div class="app-container reveal">
+    <div class="flex flex-wrap gap-3">
+      <span
+        *ngFor="let tech of techItems"
+        class="tech-capsule"
+        [style.--tech-color]="tech.color">
+        <img
+          *ngIf="tech.icon"
+          [src]="'https://cdn.simpleicons.org/' + tech.icon + '/' + tech.color.replace('#','')"
+          width="15" height="15"
+          alt="" aria-hidden="true"
+          loading="lazy">
+        {{ tech.label }}
+      </span>
     </div>
   </div>
 </section>
@@ -154,46 +602,117 @@
 <div class="app-container"><div class="shimmer-line"></div></div>
 
 <!-- Neural Core Break -->
-<div class="py-24 w-full flex justify-center items-center">
+<div class="py-10 w-full flex justify-center items-center">
   <div #expandingBox class="expanding-box bg-brand-dark dark:bg-brand-cream text-white dark:text-black w-[95%] md:w-[85%] h-[280px] sm:h-[420px] lg:h-[700px] rounded-[2rem] md:rounded-[3.5rem] lg:rounded-[5rem] relative overflow-hidden shadow-2xl flex flex-col items-center justify-center">
-    <div class="absolute inset-0 z-0 opacity-40 scale-125">
-      <div class="chart-container h-full max-h-full w-full">
-        <canvas #neuralChartCanvas></canvas>
-      </div>
-    </div>
-    <div class="z-10 text-center px-6 md:px-12 pointer-events-none">
-      <h2 class="font-serif font-bold mb-4 md:mb-10 tracking-tighter" style="font-size: clamp(2.5rem, 6vw, 9rem);">Neural Core</h2>
-      <p class="font-light opacity-80 max-w-4xl mx-auto leading-tight hidden sm:block" style="font-size: clamp(1rem, 2.5vw, 3rem);">
-        Processing intelligence locally. Scroll to expand the system.
+    <canvas #neuralChartCanvas class="absolute inset-0 w-full h-full"></canvas>
+    <div class="z-10 text-center px-6 md:px-16 pointer-events-none relative">
+      <h2 class="font-mono font-bold mb-4 md:mb-6 tracking-tighter text-brand-accent heartbeat-pulse" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">
+        ScriptOne<br>
+        IN THE BEGINNING, THERE WAS CODE 
+      </h2>
+      <p class="font-mono font-bold opacity-80 max-w-3xl mx-auto leading-snug" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+        Every solution we deliver is built at the intersection of WordPress craftsmanship, WooCommerce precision, and Agentic AI intelligence — engineered to launch fast, scale confidently, and outlast the competition.
       </p>
     </div>
   </div>
 </div>
 
+<div class="app-container"><div class="shimmer-line"></div></div>
+
 <!-- Resources -->
-<section id="resources-sec" class="min-h-screen flex flex-col justify-center py-24">
-  <div class="app-container reveal mb-16">
-    <h2 class="font-serif font-bold tracking-tighter mb-6" style="font-size: clamp(3rem, 5vw, 7rem);">Resources.</h2>
+<section id="resources-sec" class="flex flex-col justify-center py-16">
+  <div class="app-container reveal mb-10">
+    <h2 class="font-mono font-bold tracking-tighter mb-6 text-brand-accent heartbeat-pulse" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">Resources.</h2>
+    <p class="font-mono font-bold opacity-60 max-w-5xl leading-snug" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+      Practical guides, checklists, and expert articles across WordPress, WooCommerce, Agentic AI, and custom web development — built to help your business make smarter digital decisions.
+    </p>
   </div>
-  <div class="app-container space-y-6 reveal">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 md:p-10 rounded-[1.5rem] md:rounded-[3rem] border border-black/5 dark:border-white/5 bg-white/40 dark:bg-white/5 hover:border-brand-accent transition-all group gap-6 sm:gap-0">
-      <div>
-        <h4 class="text-xl md:text-2xl font-bold mb-1">AI Readiness Framework</h4>
-        <p class="opacity-50 text-sm uppercase tracking-widest font-mono">PDF / 4.2MB / 2024 Audit</p>
+  <div class="app-container reveal">
+    <div class="resources-scroll space-y-4 md:space-y-[18px] pr-2">
+      <div *ngFor="let resource of resourceItems" class="resource-capsule group">
+        <div>
+          <h4 class="font-mono font-bold mb-1" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">{{ resource.title }}</h4>
+          <p class="opacity-50 text-xs md:text-sm uppercase tracking-[0.2em] font-mono font-bold">{{ resource.meta }}</p>
+        </div>
+        <a class="resource-visit" [href]="" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Visit ' + resource.title">
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
-      <button class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-brand-dark text-white dark:bg-brand-cream dark:text-black flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">↓</button>
     </div>
   </div>
 </section>
 
-<!-- Sponsor -->
-<section id="sponsor" class="pb-24 pt-12">
+<div class="app-container"><div class="shimmer-line"></div></div>
+
+<!-- Consult -->
+<section id="sponsor" class="pb-24 pt-14">
   <div class="app-container">
-    <div class="bg-brand-dark text-white dark:bg-brand-cream dark:text-black rounded-[2rem] md:rounded-[4rem] lg:rounded-[5rem] p-10 md:p-20 lg:p-32 text-center shadow-2xl reveal relative overflow-hidden">
-      <h2 class="font-serif font-bold mb-6 md:mb-10 tracking-tighter z-10 relative" style="font-size: clamp(2.5rem, 8vw, 10rem);">Sponsor Us.</h2>
-      <div class="flex flex-wrap justify-center gap-6 md:gap-10 z-10 relative">
-        <button class="px-8 py-5 md:px-14 md:py-7 lg:px-20 lg:py-8 bg-brand-accent text-white rounded-full font-bold text-lg md:text-xl lg:text-2xl hover:scale-110 shadow-2xl transition-transform">Partner Now</button>
-      </div>
+    <div class="bg-brand-dark text-white dark:bg-brand-cream dark:text-black rounded-[2rem] md:rounded-[4rem] lg:rounded-[5rem] p-10 md:p-16 lg:p-20 shadow-2xl reveal relative overflow-hidden">
+      <h2 class="font-mono font-bold mb-8 tracking-tighter z-10 relative text-brand-accent heartbeat-pulse text-center" style="font-size: clamp(1.8rem, 5vw, 4.5rem);">Want a quote in 24–48 hours?</h2>
+
+      <form #consultFormRef="ngForm" class="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10 max-w-5xl mx-auto" (ngSubmit)="submitConsultForm(consultFormRef)" novalidate>
+        <div>
+          <label for="consult-name" class="block font-mono font-bold text-xs uppercase tracking-widest opacity-70 mb-2">Name *</label>
+          <input id="consult-name" type="text" required minlength="2" maxlength="80"
+                 [(ngModel)]="consultForm.name" name="name" #nameModel="ngModel"
+                 [class.border-red-500]="isConsultFieldInvalid(nameModel)"
+                 class="w-full rounded-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20 px-4 py-3 font-mono font-bold outline-none focus:border-brand-accent transition-colors">
+          <p *ngIf="nameModel.errors?.['required'] && (nameModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Name is required.</p>
+          <p *ngIf="nameModel.errors?.['minlength'] && (nameModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Minimum 2 characters required.</p>
+          <p *ngIf="nameModel.errors?.['maxlength'] && (nameModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Maximum 80 characters allowed.</p>
+        </div>
+        <div>
+          <label for="consult-email" class="block font-mono font-bold text-xs uppercase tracking-widest opacity-70 mb-2">Email *</label>
+          <input id="consult-email" type="email" required maxlength="120" email
+                 [(ngModel)]="consultForm.email" name="email" #emailModel="ngModel"
+                 [class.border-red-500]="isConsultFieldInvalid(emailModel)"
+                 class="w-full rounded-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20 px-4 py-3 font-mono font-bold outline-none focus:border-brand-accent transition-colors">
+          <p *ngIf="emailModel.errors?.['required'] && (emailModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Email is required.</p>
+          <p *ngIf="emailModel.errors?.['email'] && (emailModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Please enter a valid email address.</p>
+          <p *ngIf="emailModel.errors?.['maxlength'] && (emailModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Maximum 120 characters allowed.</p>
+        </div>
+        <div class="md:col-span-2">
+          <label for="consult-service" class="block font-mono font-bold text-xs uppercase tracking-widest opacity-70 mb-2">Service *</label>
+          <select id="consult-service" required
+                  [(ngModel)]="consultForm.service" name="service" #serviceModel="ngModel"
+                  [class.border-red-500]="isConsultFieldInvalid(serviceModel)"
+                  class="w-full rounded-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20 px-4 py-3 font-mono font-bold outline-none focus:border-brand-accent transition-colors">
+            <option value="" disabled style="color:#6b7280;background:#ffffff;">Select a service</option>
+            <option *ngFor="let service of consultServiceOptions" [value]="service" style="color:#111111;background:#ffffff;">
+              {{ service }}
+            </option>
+          </select>
+          <p *ngIf="serviceModel.errors?.['required'] && (serviceModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Please select one service.</p>
+        </div>
+        <div class="md:col-span-2">
+          <label for="consult-description" class="block font-mono font-bold text-xs uppercase tracking-widest opacity-70 mb-2">Description *</label>
+          <textarea id="consult-description" required rows="5" minlength="15" maxlength="2000"
+                    [(ngModel)]="consultForm.description" name="description" #descriptionModel="ngModel"
+                    [class.border-red-500]="isConsultFieldInvalid(descriptionModel)"
+                    class="w-full rounded-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20 px-4 py-3 font-mono font-bold outline-none focus:border-brand-accent transition-colors resize-y"></textarea>
+          <p *ngIf="descriptionModel.errors?.['required'] && (descriptionModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Description is required.</p>
+          <p *ngIf="descriptionModel.errors?.['minlength'] && (descriptionModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Minimum 15 characters required.</p>
+          <p *ngIf="descriptionModel.errors?.['maxlength'] && (descriptionModel.touched || consultSubmitted)" class="mt-1 text-xs text-red-400 font-mono">Maximum 2000 characters allowed.</p>
+        </div>
+        <div class="md:col-span-2">
+          <div *ngIf="consultAlert"
+               class="rounded-xl px-4 py-3 text-sm font-mono font-bold border transition-all"
+               [ngClass]="consultAlert.type === 'success'
+                 ? 'bg-emerald-500/15 border-emerald-400/50 text-emerald-200'
+                 : 'bg-red-500/15 border-red-400/50 text-red-200'">
+            {{ consultAlert.message }}
+          </div>
+        </div>
+        <div class="md:col-span-2 text-center pt-2">
+          <button type="submit"
+                  [disabled]="consultFormRef.invalid || consultFormRef.pristine || consultSubmitting"
+                  class="px-8 py-4 rounded-full bg-brand-accent text-white font-mono font-bold uppercase tracking-widest transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 enabled:hover:shadow-2xl">
+            Request Scope
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
+
+<div class="app-container"><div class="shimmer-line"></div></div>

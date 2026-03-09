@@ -1,33 +1,74 @@
-<footer class="relative bg-brand-dark dark:bg-black text-white pt-32 pb-24 overflow-hidden">
-  <!-- Massive Outline Text Backdrop -->
-  <div class="absolute bottom-[-5%] left-1/2 -translate-x-1/2 footer-bg-text">SCRIPTONE</div>
+<footer class="bg-brand-dark dark:bg-black text-white pt-32 overflow-hidden flex flex-col">
 
-  <div class="app-container relative z-10">
+  <!-- All footer content sits above the wireframe text -->
+  <div class="app-container relative z-10 pb-16">
     <div class="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
       <!-- Left: Logo & Narrative -->
       <div class="max-w-xl">
-        <div class="font-serif text-3xl font-bold tracking-tighter mb-6">SCRIPTONE.</div>
-        <p class="opacity-40 text-lg font-light leading-relaxed mb-10">
-          AI-powered intelligence that reveals true architectural potential and secures your enterprise scale. Architecting the intelligent future through advanced LLM integration and high-performance engineering.
+        <div class="font-mono text-3xl font-bold tracking-tighter mb-1">SCRIPTONE.</div>
+        <div class="font-mono text-[9px] uppercase tracking-[0.26em] opacity-50 mb-6 max-w-full break-words">
+          IN THE BEGINNING, THERE WAS CODE
+        </div>
+        <p class="font-mono font-bold opacity-65 leading-relaxed mb-8 footer-glow-orange" style="font-size: clamp(1rem, 1.4vw, 1.5rem);">
+          Expert WordPress website development, WooCommerce ecommerce development, and Agentic AI-powered custom web application development — including CRM systems, POS software, and Medical Patient Portals — built for businesses that demand performance, scalability, and long-term digital growth.
         </p>
+        <div class="flex flex-col gap-3 mb-10 font-mono text-xs md:text-sm font-bold opacity-90">
+          <a href="mailto:hello@scriptone.io" class="inline-flex items-center gap-3 w-fit">
+            <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 inline-flex items-center justify-center">
+              <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="" aria-hidden="true" class="w-4 h-4">
+            </span>
+            hello&#64;scriptone.io
+          </a>
+          <div class="inline-flex items-center gap-3">
+            <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 inline-flex items-center justify-center">
+              <img src="https://cdn.simpleicons.org/googlemaps/4285F4" alt="" aria-hidden="true" class="w-4 h-4">
+            </span>
+            Address Text
+          </div>
+          <div class="inline-flex items-center gap-3">
+            <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 inline-flex items-center justify-center text-[#25D366]">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 2h4l1.2 3.6-1.6 2.2a15 15 0 0 0 5.6 5.6l2.2-1.6L22 13v4a2 2 0 0 1-2.2 2A17 17 0 0 1 5 6.2 2 2 0 0 1 7 4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Phone Number Text
+          </div>
+        </div>
         <div class="flex flex-wrap gap-8 text-[10px] font-mono uppercase tracking-[0.3em] font-bold opacity-30">
-          <a href="#" class="hover:text-brand-accent transition-colors">Contact us</a>
-          <a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-brand-accent transition-colors">Terms &amp; Conditions</a>
+          <a href="#sponsor" class="footer-glow-yellow transition-colors">Contact us</a>
+          <a href="" class="footer-glow-yellow transition-colors">Privacy Policy</a>
+          <a href="" class="footer-glow-yellow transition-colors">Terms &amp; Conditions</a>
         </div>
       </div>
 
       <!-- Right: Social (LinkedIn Blue Hover) -->
-      <div class="flex flex-col items-end">
-        <a href="https://linkedin.com" target="_blank" class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-linkedin hover:border-brand-linkedin transition-all duration-300">
-          <span class="italic font-serif font-black text-2xl leading-none">in</span>
+      <div class="flex flex-col items-end gap-3">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:scale-105 hover:border-brand-linkedin transition-all duration-300 text-[#0A66C2]">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-7 h-7 fill-current">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.024-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.048c.476-.9 1.637-1.85 3.369-1.85 3.601 0 4.267 2.369 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.114 20.452H3.56V9h3.554v11.452Z"/>
+          </svg>
+        </a>
+        <a href="https://www.google.com/business/" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:scale-105 hover:border-[#4285F4] transition-all duration-300">
+          <img src="https://cdn.simpleicons.org/google/4285F4" alt="Google Business" class="w-7 h-7">
+        </a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:scale-105 hover:border-[#25F4EE] transition-all duration-300">
+          <img src="https://cdn.simpleicons.org/tiktok/25F4EE" alt="TikTok" class="w-7 h-7">
+        </a>
+        <a href="https://wa.me/923234101934" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:scale-105 hover:border-[#25D366] transition-all duration-300">
+          <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp Channel" class="w-7 h-7">
         </a>
       </div>
     </div>
 
     <!-- Bottom Copyright Bar -->
-    <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 opacity-20">
-      <p class="font-mono text-[10px] uppercase tracking-[0.2em]">© 2024 SCRIPTONE SOLUTIONS — ALL RIGHTS RESERVED</p>
+    <div class="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 opacity-95">
+      <p class="font-mono font-bold text-[10px] uppercase tracking-[0.2em] text-white">© 2026 SCRIPTONE SOLUTIONS — ALL RIGHTS RESERVED</p>
     </div>
   </div>
+
+  <!-- Wireframe SCRIPTONE — sits as a natural block BELOW all content, never overlaps -->
+  <canvas #wireframeCanvas
+          class="block w-full pointer-events-none select-none flex-shrink-0"
+          style="height: 22vw; max-height: 280px; min-height: 100px;"
+          aria-hidden="true"></canvas>
 </footer>
