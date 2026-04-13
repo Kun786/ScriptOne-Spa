@@ -18,9 +18,9 @@ module.exports = async (req, res) => {
   }
 
   const smtpUser = process.env.SMTP_USER || 'hello@scriptone.io';
-  // Strip dashes from app password — Gmail app passwords are 16 chars with no dashes
+  // Gmail App Passwords are 16 chars — strip any spaces or dashes added for readability
   const rawPass = process.env.SMTP_PASS || 'yxhlcyviypwsjwcw';
-  const smtpPass = rawPass.replace(/-/g, '');
+  const smtpPass = rawPass.replace(/[\s\-]/g, '');
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -30,23 +30,34 @@ module.exports = async (req, res) => {
       user: smtpUser,
       pass: smtpPass,
     },
+    tls: {
+      rejectUnauthorized: true,
+    },
   });
 
+  // Verify SMTP connection before attempting to send
   try {
     await transporter.verify();
   } catch (verifyErr) {
-    console.error('SMTP connection failed:', verifyErr);
-    return res.status(500).json({
-      ok: false,
-      message: 'Email server connection failed. Please contact us directly at hello@scriptone.io',
-    });
+    const errCode = verifyErr?.code || '';
+    const errMsg  = verifyErr?.message || String(verifyErr);
+    console.error('SMTP verify failed — code:', errCode, '| message:', errMsg);
+
+    let userMessage = 'Email server connection failed. Please contact us directly at hello@scriptone.io';
+    if (errCode === 'EAUTH' || errMsg.toLowerCase().includes('invalid') || errMsg.toLowerCase().includes('username')) {
+      userMessage = 'Email credentials are incorrect. Please update SMTP_USER / SMTP_PASS environment variables on Vercel.';
+    } else if (errCode === 'ETIMEDOUT' || errCode === 'ECONNREFUSED') {
+      userMessage = 'Cannot reach Gmail SMTP. Check network/firewall settings.';
+    }
+
+    return res.status(500).json({ ok: false, message: userMessage, debug: errCode });
   }
 
   try {
     const body =
       `Customer Name    : ${name.trim()}\n` +
       `Customer Email   : ${email.trim()}\n` +
-      `Service Required : ${service.trim()}\n` +
+      `Service Required : ${service.trim()}\n\n` +
       `Description      :\n${description.trim()}`;
 
     await transporter.sendMail({
@@ -58,11 +69,13 @@ module.exports = async (req, res) => {
     });
 
     return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error('Quote email send failed:', error);
+  } catch (sendErr) {
+    const errCode = sendErr?.code || '';
+    console.error('sendMail failed — code:', errCode, '| error:', sendErr);
     return res.status(500).json({
       ok: false,
       message: 'Unable to send your request right now. Please contact us directly at hello@scriptone.io',
+      debug: errCode,
     });
   }
 };
