@@ -14,41 +14,55 @@ module.exports = async (req, res) => {
     !service || !service.trim() ||
     !description || description.trim().length < 15 || description.trim().length > 2000
   ) {
-    return res.status(400).json({ ok: false, message: 'Invalid payload' });
+    return res.status(400).json({ ok: false, message: 'Invalid form data. Please check all fields.' });
   }
 
   const smtpUser = process.env.SMTP_USER || 'hello@scriptone.io';
-  const smtpPass = process.env.SMTP_PASS || 'yxhl-cyvi-ypws-jwcw';
-  if (!smtpUser || !smtpPass) {
-    return res.status(500).json({ ok: false, message: 'Email server is not configured' });
+  // Strip dashes from app password — Gmail app passwords are 16 chars with no dashes
+  const rawPass = process.env.SMTP_PASS || 'yxhlcyviypwsjwcw';
+  const smtpPass = rawPass.replace(/-/g, '');
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: smtpUser,
+      pass: smtpPass,
+    },
+  });
+
+  try {
+    await transporter.verify();
+  } catch (verifyErr) {
+    console.error('SMTP connection failed:', verifyErr);
+    return res.status(500).json({
+      ok: false,
+      message: 'Email server connection failed. Please contact us directly at hello@scriptone.io',
+    });
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
-
     const body =
-      `Customer Name  : ${name.trim()}\n` +
-      `Customer Email: ${email.trim()}\n` +
-      `Services Required: ${service.trim()}\n` +
-      `Customer Description: ${description.trim()}`;
+      `Customer Name    : ${name.trim()}\n` +
+      `Customer Email   : ${email.trim()}\n` +
+      `Service Required : ${service.trim()}\n` +
+      `Description      :\n${description.trim()}`;
 
     await transporter.sendMail({
       from: `"ScriptOne Website" <${smtpUser}>`,
       to: 'hello@scriptone.io',
-      subject: 'Scriptone Project Quote',
+      replyTo: email.trim(),
+      subject: `Scriptone Project Quote — ${service.trim()}`,
       text: body,
     });
 
     return res.status(200).json({ ok: true });
   } catch (error) {
-    console.error('Quote email failed:', error);
-    return res.status(500).json({ ok: false, message: 'Unable to send email' });
+    console.error('Quote email send failed:', error);
+    return res.status(500).json({
+      ok: false,
+      message: 'Unable to send your request right now. Please contact us directly at hello@scriptone.io',
+    });
   }
 };
-

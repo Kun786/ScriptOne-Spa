@@ -314,9 +314,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
       if (!response.ok) {
         if (response.status === 404 && window.location.hostname === 'localhost') {
-          throw new Error('Local API route not found. Use `vercel dev` for API routes or deploy to Vercel.');
+          throw new Error('API route not available locally. Run `vercel dev` or deploy to Vercel to test email.');
         }
-        throw new Error('Request failed');
+        let errMsg = 'Unable to send your request. Please try again or email us directly at hello@scriptone.io';
+        try {
+          const errBody = await response.json();
+          if (errBody?.message) errMsg = errBody.message;
+        } catch { /* ignore parse errors */ }
+        throw new Error(errMsg);
       }
 
       form.resetForm({ service: '' });
